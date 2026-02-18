@@ -190,6 +190,56 @@ body.no-scroll{overflow:hidden!important;position:fixed;width:100%;top:0;left:0}
 .role-opt.selected{border-color:var(--green);background:rgba(74,222,128,0.06)}
 .role-opt .opt-icon{font-size:1.4rem;flex-shrink:0}
 
+/* MATERIALS */
+.mat-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:10px;margin-top:12px}
+.mat-card{background:var(--surface);border:2px solid var(--border);border-radius:14px;overflow:hidden;cursor:pointer;transition:all .3s;text-align:center}
+.mat-card:hover{border-color:var(--cyan);transform:translateY(-2px)}
+.mat-card.selected{border-color:var(--green);box-shadow:0 0 16px rgba(74,222,128,0.15)}
+.mat-swatch{height:100px;overflow:hidden;border-radius:12px 12px 0 0}
+.mat-label{padding:10px;font-size:13px;font-weight:600}
+.mat-hint{font-size:11px;color:var(--muted);padding:0 10px 10px}
+
+/* EMPATHY */
+.empathy-mockups{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:12px}
+.empathy-opt{background:var(--surface);border:2px solid var(--border);border-radius:14px;padding:14px;cursor:pointer;transition:all .3s}
+.empathy-opt:hover{border-color:var(--cyan)}
+.empathy-opt.selected{border-color:var(--green);box-shadow:0 0 16px rgba(74,222,128,0.15)}
+.empathy-mockup{min-height:100px;margin-bottom:8px}
+.empathy-label{font-size:13px;font-weight:600;text-align:center}
+
+/* COLOR MEMORY */
+.cm-palette{display:flex;gap:6px;justify-content:center;margin:20px 0;padding:16px;background:var(--surface);border-radius:14px}
+.cm-swatch{width:48px;height:48px;border-radius:10px}
+.cm-options{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:16px}
+.cm-opt{background:var(--surface);border:2px solid var(--border);border-radius:14px;padding:12px;cursor:pointer;transition:all .3s;display:flex;gap:4px;justify-content:center}
+.cm-opt:hover{border-color:var(--cyan)}
+.cm-opt.selected{border-color:var(--green);box-shadow:0 0 16px rgba(74,222,128,0.15)}
+.cm-opt .cm-swatch{width:36px;height:36px;border-radius:8px}
+
+/* SPATIAL */
+.spatial-unfold{display:flex;justify-content:center;margin:16px 0;padding:20px;background:var(--surface);border-radius:14px}
+.spatial-options{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:10px;margin-top:12px}
+.spatial-opt{background:var(--surface);border:2px solid var(--border);border-radius:14px;padding:16px;cursor:pointer;transition:all .3s;text-align:center}
+.spatial-opt:hover{border-color:var(--cyan);transform:translateY(-2px)}
+.spatial-opt.selected{border-color:var(--green);box-shadow:0 0 16px rgba(74,222,128,0.15)}
+.spatial-opt svg{max-width:100%;height:auto}
+.spatial-opt-label{margin-top:8px;font-size:13px;font-weight:600}
+
+/* STYLE VS FUNCTION */
+.sf-pair{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:16px 0}
+.sf-chair{background:var(--surface);border-radius:14px;padding:16px;text-align:center}
+.sf-chair svg{max-width:100%;height:auto}
+.sf-chair-label{margin-top:8px;font-size:13px;font-weight:600}
+.sf-chair-desc{font-size:12px;color:var(--muted);margin-top:4px}
+.sf-contexts{display:flex;flex-direction:column;gap:10px}
+.sf-context{background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:16px}
+.sf-context-label{font-family:'PPNeueMachina',sans-serif;font-size:11px;font-weight:800;letter-spacing:2px;text-transform:uppercase;color:var(--amber);margin-bottom:8px}
+.sf-context-q{font-size:14px;color:var(--muted);margin-bottom:12px}
+.sf-btns{display:flex;gap:8px}
+.sf-btn{flex:1;background:var(--surface2);border:2px solid var(--border);border-radius:10px;padding:10px;cursor:pointer;transition:all .3s;font-size:13px;font-weight:600;color:var(--white);text-align:center;font-family:'Gilroy',sans-serif}
+.sf-btn:hover{border-color:var(--cyan)}
+.sf-btn.selected{border-color:var(--green);background:rgba(74,222,128,0.06)}
+
 /* ===== RESULTS PAGE STYLES ===== */
 .results-container{max-width:1280px;margin:0 auto;padding:0 20px}
 .hero{background:var(--dark);color:var(--white);padding:60px 0 40px;position:relative;overflow:hidden}
@@ -282,6 +332,11 @@ body.no-scroll{overflow:hidden!important;position:fixed;width:100%;top:0;left:0}
   .hero-right{align-items:flex-start}
   .level-grid{gap:16px}
   .color-options{grid-template-columns:1fr 1fr}
+  .empathy-mockups{grid-template-columns:1fr}
+  .sf-pair{grid-template-columns:1fr}
+  .spatial-options{grid-template-columns:1fr 1fr}
+  .mat-grid{grid-template-columns:1fr 1fr}
+  .cm-options{grid-template-columns:1fr}
 }
 </style>
 </head>
@@ -311,9 +366,9 @@ body.no-scroll{overflow:hidden!important;position:fixed;width:100%;top:0;left:0}
 <div class="screen active" id="screen-welcome">
   <div style="padding-top:24px">
     <div class="welcome-title"><span class="hl">Найди свою</span><br>дизайн-профессию</div>
-    <div class="welcome-sub">Интерактивный тест из 14 шагов: самооценка, мудборд, кернинг, кейсы, рисование, цвет — узнай, какая дизайн-специальность тебе подходит.</div>
+    <div class="welcome-sub">Интерактивный тест из 19 шагов: самооценка, мудборд, кернинг, кейсы, рисование, цвет, эмпатия, пространство — узнай, какая дизайн-специальность тебе подходит.</div>
     <div class="welcome-meta">
-      <span>⏱ ~15 минут</span><span>🎮 14 шагов</span><span>📊 Подробный профиль</span>
+      <span>⏱ ~20 минут</span><span>🎮 19 шагов</span><span>📊 Подробный профиль</span>
     </div>
     <button class="btn" onclick="go('screen-edu')">Начать тест →</button>
   </div>
@@ -373,8 +428,17 @@ body.no-scroll{overflow:hidden!important;position:fixed;width:100%;top:0;left:0}
   <div class="btn-row"><button class="btn" id="moodNext" disabled onclick="finishMoodboard()">Далее →</button></div>
 </div>
 
+<!-- SCREEN: MATERIALS -->
+<div class="screen" id="screen-materials">
+  <div class="module-tag">Модуль 6 · Материалы</div>
+  <div class="module-title">Из чего сделаешь?</div>
+  <div class="module-desc">Ты проектируешь светильник. Какой материал выберешь?</div>
+  <div class="mat-grid" id="matGrid"></div>
+  <div class="btn-row"><button class="btn" id="matNext" disabled onclick="finishMaterials()">Далее →</button></div>
+</div>
+
 <div class="screen" id="screen-case">
-  <div class="module-tag">Модуль 6 · Кейс</div>
+  <div class="module-tag">Модуль 7 · Кейс</div>
   <div class="module-title">Реши бриф</div>
   <div class="module-desc">Прочитай задачу и выбери, с чего начнёшь</div>
   <div class="case-brief"><div class="brief-label">Бриф</div><div class="brief-text">Городская библиотека хочет привлечь подростков. Сейчас они воспринимают её как скучное место. Бюджет ограничен.</div></div>
@@ -382,8 +446,17 @@ body.no-scroll{overflow:hidden!important;position:fixed;width:100%;top:0;left:0}
   <div class="btn-row"><button class="btn" id="caseNext" disabled onclick="finishCase()">Далее →</button></div>
 </div>
 
+<!-- SCREEN: EMPATHY / UX -->
+<div class="screen" id="screen-empathy">
+  <div class="module-tag">Модуль 8 · Эмпатия</div>
+  <div class="module-title">Помоги пользователю</div>
+  <div class="module-desc" id="empathyDesc"></div>
+  <div class="empathy-mockups" id="empathyOpts"></div>
+  <div class="btn-row"><button class="btn" id="empathyNext" disabled onclick="finishEmpathy()">Далее →</button></div>
+</div>
+
 <div class="screen" id="screen-draw">
-  <div class="module-tag">Модуль 7 · Рисование</div>
+  <div class="module-tag">Модуль 9 · Рисование</div>
   <div class="module-title">Нарисуй логотип</div>
   <div class="module-desc">Кофейня «Зерно» — нарисуй простой знак, который передаёт суть бренда</div>
   <div class="draw-workspace">
@@ -402,7 +475,7 @@ body.no-scroll{overflow:hidden!important;position:fixed;width:100%;top:0;left:0}
 </div>
 
 <div class="screen" id="screen-assembly">
-  <div class="module-tag">Модуль 8 · Композиция</div>
+  <div class="module-tag">Модуль 10 · Композиция</div>
   <div class="module-title">Собери макет</div>
   <div class="module-desc">Нажми на блоки, чтобы добавить их в макет в нужном порядке</div>
   <div class="assembly-area">
@@ -413,15 +486,28 @@ body.no-scroll{overflow:hidden!important;position:fixed;width:100%;top:0;left:0}
 </div>
 
 <div class="screen" id="screen-color">
-  <div class="module-tag">Модуль 9 · Цвет</div>
+  <div class="module-tag">Модуль 11 · Цвет</div>
   <div class="module-title">Выбери палитру</div>
   <div class="module-desc">Какая цветовая палитра лучше всего подойдёт для приложения медитации?</div>
   <div class="color-options" id="colorOpts"></div>
   <div class="btn-row"><button class="btn" id="colorNext" disabled onclick="finishColor()">Далее →</button></div>
 </div>
 
+<!-- SCREEN: COLOR MEMORY -->
+<div class="screen" id="screen-colormemory">
+  <div class="module-tag">Модуль 12 · Цветовая память</div>
+  <div class="module-title">Запомни палитру</div>
+  <div class="module-desc">Нажми кнопку — палитра появится на 3 секунды. Потом выбери её из вариантов.</div>
+  <div id="cmArea">
+    <button class="btn" id="cmRevealBtn" onclick="cmReveal()">Показать на 3 секунды</button>
+    <div class="cm-palette" id="cmPalette" style="display:none"></div>
+    <div class="cm-options" id="cmOptions" style="display:none"></div>
+  </div>
+  <div class="btn-row"><button class="btn" id="cmNext" disabled onclick="finishColorMemory()">Далее →</button></div>
+</div>
+
 <div class="screen" id="screen-font">
-  <div class="module-tag">Модуль 10 · Шрифты</div>
+  <div class="module-tag">Модуль 13 · Шрифты</div>
   <div class="module-title">Подбери шрифт</div>
   <div class="module-desc">Какая пара шрифтов лучше подойдёт для сайта юридической фирмы?</div>
   <div class="font-pairs" id="fontPairs"></div>
@@ -429,7 +515,7 @@ body.no-scroll{overflow:hidden!important;position:fixed;width:100%;top:0;left:0}
 </div>
 
 <div class="screen" id="screen-spot">
-  <div class="module-tag">Модуль 11 · Внимание к деталям</div>
+  <div class="module-tag">Модуль 14 · Внимание к деталям</div>
   <div class="module-title">Найди ошибку</div>
   <div class="module-desc">Перед тобой 6 элементов интерфейса. В одном из них — грубая дизайн-ошибка. Найди и нажми на него.</div>
   <div class="spot-workspace" id="spotItems"></div>
@@ -437,7 +523,7 @@ body.no-scroll{overflow:hidden!important;position:fixed;width:100%;top:0;left:0}
 </div>
 
 <div class="screen" id="screen-proportion">
-  <div class="module-tag">Модуль 12 · Пропорции</div>
+  <div class="module-tag">Модуль 15 · Пропорции</div>
   <div class="module-title">Найди золотое сечение</div>
   <div class="module-desc">Двигай разделитель, чтобы найти идеальную пропорцию прямоугольника</div>
   <div class="proportion-workspace">
@@ -448,9 +534,29 @@ body.no-scroll{overflow:hidden!important;position:fixed;width:100%;top:0;left:0}
   <div class="btn-row"><button class="btn" onclick="finishProportion()">Далее →</button></div>
 </div>
 
+<!-- SCREEN: SPATIAL THINKING -->
+<div class="screen" id="screen-spatial">
+  <div class="module-tag">Модуль 16 · Пространство</div>
+  <div class="module-title">Представь в 3D</div>
+  <div class="module-desc">Какой объект получится из этой развёртки?</div>
+  <div class="spatial-unfold" id="spatialUnfold"></div>
+  <div class="spatial-options" id="spatialOpts"></div>
+  <div class="btn-row"><button class="btn" id="spatialNext" disabled onclick="finishSpatial()">Далее →</button></div>
+</div>
+
+<!-- SCREEN: STYLE VS FUNCTION -->
+<div class="screen" id="screen-stylefunction">
+  <div class="module-tag">Модуль 17 · Стиль и функция</div>
+  <div class="module-title">Что важнее?</div>
+  <div class="module-desc" id="sfDesc"></div>
+  <div class="sf-pair" id="sfPair"></div>
+  <div class="sf-contexts" id="sfContexts"></div>
+  <div class="btn-row"><button class="btn" id="sfNext" disabled onclick="finishStyleFunction()">Далее →</button></div>
+</div>
+
 <!-- SCREEN: ROLE -->
 <div class="screen" id="screen-role">
-  <div class="module-tag">Модуль 13 · Роль</div>
+  <div class="module-tag">Модуль 18 · Роль</div>
   <div class="module-title">Кто ты в команде?</div>
   <div class="module-desc">Два сценария — выбери роль, которая тебе ближе в каждом</div>
   <div id="roleContainer"></div>
@@ -458,7 +564,7 @@ body.no-scroll{overflow:hidden!important;position:fixed;width:100%;top:0;left:0}
 </div>
 
 <div class="screen" id="screen-dream">
-  <div class="module-tag">Модуль 14 · Мечта</div>
+  <div class="module-tag">Модуль 19 · Мечта</div>
   <div class="module-title">Проект мечты</div>
   <div class="module-desc">Полная свобода! Выбери 2 проекта, которые хочется сделать больше всего</div>
   <div class="choice-grid" id="dreamGrid"></div>
@@ -525,7 +631,7 @@ if (tg) { tg.ready(); tg.expand(); }
 
 // ===== STATE =====
 const S = { edu:null, scores:{scale:50,material:50,thinking:50,comm:50,role:50}, achievements:[] };
-const screens = ['screen-welcome','screen-edu','screen-selfassess','screen-kerning','screen-choice','screen-moodboard','screen-case','screen-draw','screen-assembly','screen-color','screen-font','screen-spot','screen-proportion','screen-role','screen-dream','screen-results'];
+const screens = ['screen-welcome','screen-edu','screen-selfassess','screen-kerning','screen-choice','screen-moodboard','screen-materials','screen-case','screen-empathy','screen-draw','screen-assembly','screen-color','screen-colormemory','screen-font','screen-spot','screen-proportion','screen-spatial','screen-stylefunction','screen-role','screen-dream','screen-results'];
 let currentScreen = 'screen-welcome';
 const screenHistory = [];
 
@@ -586,10 +692,15 @@ function go(id){
   if(id==='screen-case')initCase();
   if(id==='screen-draw')initDraw();
   if(id==='screen-assembly')initAssembly();
+  if(id==='screen-materials')initMaterials();
+  if(id==='screen-empathy')initEmpathy();
   if(id==='screen-color')initColor();
+  if(id==='screen-colormemory')initColorMemory();
   if(id==='screen-font')initFont();
   if(id==='screen-spot')initSpot();
   if(id==='screen-proportion')initProportion();
+  if(id==='screen-spatial')initSpatial();
+  if(id==='screen-stylefunction')initStyleFunction();
   if(id==='screen-role')initRole();
   if(id==='screen-dream')initDream();
   if(id==='screen-results')initResults();
@@ -718,14 +829,52 @@ function finishMoodboard(){
     Object.keys(axes).forEach(k=>{S.scores[k]+=axes[k]});
   });
   S.achievements.push('Куратор');
-  awardXP(65,'Мудборд',null,'screen-case');
+  awardXP(65,'Мудборд',null,'screen-materials');
 }
+
+// ===== MATERIALS =====
+const matData=[
+  {id:'wood',img:I+'mat_wood.jpg',label:'Дерево',hint:'Тёплое, живое, тактильное',axes:{material:15,scale:5,thinking:-5}},
+  {id:'metal',img:I+'mat_metal.jpg',label:'Металл',hint:'Прочный, индустриальный',axes:{material:5,scale:8,thinking:-10}},
+  {id:'fabric',img:I+'mat_fabric.jpg',label:'Ткань',hint:'Мягкая, пластичная',axes:{material:15,thinking:10,scale:-5}},
+  {id:'plastic',img:I+'mat_plastic.jpg',label:'Пластик',hint:'Массовый, технологичный',axes:{material:-10,thinking:-5,role:5}},
+  {id:'concrete',img:I+'mat_concrete.jpg',label:'Бетон',hint:'Монументальный, брутальный',axes:{material:5,scale:15,thinking:-10}},
+  {id:'glass',img:I+'mat_glass.jpg',label:'Стекло',hint:'Прозрачное, хрупкое',axes:{material:-5,thinking:5,comm:-5}}
+];
+let matSel=-1;
+function initMaterials(){
+  matSel=-1;
+  document.getElementById('matGrid').innerHTML=matData.map((m,i)=>'<div class="mat-card" data-i="'+i+'" onclick="pickMat(this)"><div class="mat-swatch"><img src="'+m.img+'" alt="'+m.label+'" style="width:100%;height:100%;object-fit:cover;display:block;border-radius:12px 12px 0 0"></div><div class="mat-label">'+m.label+'</div><div class="mat-hint">'+m.hint+'</div></div>').join('');
+  document.getElementById('matNext').disabled=true;
+}
+function pickMat(el){document.querySelectorAll('.mat-card').forEach(c=>c.classList.remove('selected'));el.classList.add('selected');matSel=+el.dataset.i;document.getElementById('matNext').disabled=false}
+function finishMaterials(){const axes=matData[matSel].axes;Object.keys(axes).forEach(k=>{S.scores[k]+=axes[k]});S.achievements.push('Материалист');awardXP(55,'Материалы',null,'screen-case')}
 
 // ===== 3. CASE =====
 const caseOpts=[{icon:'🏗',text:'Перепроектировать пространство — зоны для тусовок, гамаки, подиумы',axes:{scale:15,material:10}},{icon:'🎨',text:'Яркая айдентика — мемы, стикеры, навигация',axes:{comm:-15,thinking:5,material:-10}},{icon:'📱',text:'Приложение — квесты, AR с книжными героями',axes:{material:-20,comm:-10}},{icon:'👕',text:'Мерч — худи, шоперы, значки для читателей',axes:{material:15,thinking:15}},{icon:'🪑',text:'Модульная мебель — трансформеры для разных сценариев',axes:{scale:5,material:10,thinking:-10}},{icon:'📊',text:'Стратегия продвижения — SMM, коллабы, ивенты',axes:{role:25,thinking:-10}}];
 function initCase(){document.getElementById('caseOpts').innerHTML=caseOpts.map((o,i)=>'<div class="case-opt" data-i="'+i+'" onclick="pickCase(this)"><div class="opt-icon">'+o.icon+'</div><div class="opt-text">'+o.text+'</div></div>').join('');document.getElementById('caseNext').disabled=true}
 function pickCase(el){document.querySelectorAll('#caseOpts .case-opt').forEach(c=>c.classList.remove('selected'));el.classList.add('selected');S._caseSel=+el.dataset.i;document.getElementById('caseNext').disabled=false}
-function finishCase(){awardXP(70,'Кейс',null,'screen-draw')}
+function finishCase(){awardXP(70,'Кейс',null,'screen-empathy')}
+
+// ===== EMPATHY / UX =====
+const empathyData={
+  scenario:'Бабушка 70 лет хочет заказать лекарство через приложение. Она плохо видит и путается в интерфейсах. Какой вариант ей подойдёт?',
+  options:[
+    {label:'Крупные кнопки + голос',mockup:'<div style="background:#1a1a2e;border-radius:12px;padding:12px;text-align:center"><div style="width:100%;height:36px;background:#00e5ff;border-radius:18px;display:flex;align-items:center;justify-content:center;margin-bottom:8px"><span style="font-size:16px;font-weight:800;color:#111">ЗАКАЗАТЬ</span></div><div style="width:100%;height:36px;background:rgba(0,229,255,0.15);border-radius:18px;display:flex;align-items:center;justify-content:center;gap:6px"><span style="font-size:20px">🎙</span><span style="font-size:14px;color:#00e5ff;font-weight:700">Голос</span></div></div>',axes:{comm:-10,thinking:8,role:5},acc:95},
+    {label:'Стандартный каталог',mockup:'<div style="background:#1a1a2e;border-radius:12px;padding:10px"><div style="height:6px;background:#333;border-radius:3px;width:60%;margin-bottom:6px"></div><div style="display:flex;gap:4px;margin-bottom:6px"><div style="flex:1;height:40px;background:#222;border-radius:6px"></div><div style="flex:1;height:40px;background:#222;border-radius:6px"></div><div style="flex:1;height:40px;background:#222;border-radius:6px"></div></div><div style="height:6px;background:#333;border-radius:3px;width:40%"></div></div>',axes:{comm:5,thinking:-5},acc:30},
+    {label:'Минимализм + жесты',mockup:'<div style="background:#1a1a2e;border-radius:12px;padding:16px;text-align:center"><div style="width:40px;height:40px;border:2px solid #555;border-radius:50%;margin:0 auto 8px;display:flex;align-items:center;justify-content:center;font-size:18px">↔</div><div style="font-size:11px;color:#555">свайп для навигации</div></div>',axes:{thinking:5,comm:5,material:-5},acc:20},
+    {label:'Чат-бот помощник',mockup:'<div style="background:#1a1a2e;border-radius:12px;padding:10px"><div style="background:#2a2a3e;border-radius:10px 10px 10px 2px;padding:8px;margin-bottom:6px;font-size:11px;color:#aaa">Какое лекарство ищете?</div><div style="background:rgba(0,229,255,0.1);border-radius:10px 10px 2px 10px;padding:8px;margin-left:auto;max-width:70%;font-size:11px;color:#00e5ff">Аспирин</div></div>',axes:{comm:-8,role:8,thinking:-3},acc:60}
+  ]
+};
+let empSel=-1;
+function initEmpathy(){
+  empSel=-1;
+  document.getElementById('empathyDesc').textContent=empathyData.scenario;
+  document.getElementById('empathyOpts').innerHTML=empathyData.options.map((o,i)=>'<div class="empathy-opt" data-i="'+i+'" onclick="pickEmpathy(this)"><div class="empathy-mockup">'+o.mockup+'</div><div class="empathy-label">'+o.label+'</div></div>').join('');
+  document.getElementById('empathyNext').disabled=true;
+}
+function pickEmpathy(el){document.querySelectorAll('.empathy-opt').forEach(c=>c.classList.remove('selected'));el.classList.add('selected');empSel=+el.dataset.i;document.getElementById('empathyNext').disabled=false}
+function finishEmpathy(){const o=empathyData.options[empSel];Object.keys(o.axes).forEach(k=>{S.scores[k]+=o.axes[k]});if(empSel===0)S.achievements.push('Эмпат');awardXP(empSel===0?80:50,'Эмпатия',o.acc,'screen-draw')}
 
 // ===== 4. DRAWING =====
 let drawCtx,drawColor='#ffffff',drawSize=3,isDrawing=false,drawW=600,drawH=400;
@@ -785,7 +934,48 @@ const colorPalettes=[{colors:['#1a1a2e','#16213e','#533483','#e94560'],label:'Т
 let colorSel=-1;
 function initColor(){colorSel=-1;document.getElementById('colorOpts').innerHTML=colorPalettes.map((p,i)=>'<div class="color-opt" data-i="'+i+'" onclick="pickColor(this)"><div class="color-swatches">'+p.colors.map(c=>'<div style="background:'+c+'"></div>').join('')+'</div><div class="color-opt-label">'+p.label+'</div></div>').join('');document.getElementById('colorNext').disabled=true}
 function pickColor(el){document.querySelectorAll('.color-opt').forEach(c=>c.classList.remove('selected'));el.classList.add('selected');colorSel=+el.dataset.i;document.getElementById('colorNext').disabled=false}
-function finishColor(){const axes=colorPalettes[colorSel].axes;Object.keys(axes).forEach(k=>{S.scores[k]+=axes[k]});const colorAcc=colorSel===1?95:colorSel===2?60:colorSel===0?45:55;awardXP(60,'Цвет',colorAcc,'screen-font')}
+function finishColor(){const axes=colorPalettes[colorSel].axes;Object.keys(axes).forEach(k=>{S.scores[k]+=axes[k]});const colorAcc=colorSel===1?95:colorSel===2?60:colorSel===0?45:55;awardXP(60,'Цвет',colorAcc,'screen-colormemory')}
+
+// ===== COLOR MEMORY =====
+const cmTarget=['#e94560','#533483','#16213e','#1a1a2e'];
+const cmDecoys=[
+  ['#e94560','#16213e','#533483','#1a1a2e'],
+  ['#ff6b9d','#533483','#16213e','#1a1a2e'],
+  ['#e94560','#533483','#1a3a5e','#1a1a2e'],
+  ['#e94560','#533483','#16213e','#2a2a4e']
+];
+let cmSel=-1,cmRevealed=false;
+function initColorMemory(){
+  cmSel=-1;cmRevealed=false;
+  document.getElementById('cmRevealBtn').style.display='inline-flex';
+  document.getElementById('cmRevealBtn').disabled=false;
+  document.getElementById('cmPalette').style.display='none';
+  document.getElementById('cmOptions').style.display='none';
+  document.getElementById('cmNext').disabled=true;
+  document.getElementById('cmPalette').innerHTML=cmTarget.map(c=>'<div class="cm-swatch" style="background:'+c+'"></div>').join('');
+}
+function cmReveal(){
+  cmRevealed=true;
+  document.getElementById('cmRevealBtn').disabled=true;
+  document.getElementById('cmPalette').style.display='flex';
+  setTimeout(()=>{
+    document.getElementById('cmPalette').style.display='none';
+    document.getElementById('cmRevealBtn').style.display='none';
+    const allOpts=[cmTarget,...cmDecoys];
+    // Shuffle
+    for(let i=allOpts.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[allOpts[i],allOpts[j]]=[allOpts[j],allOpts[i]]}
+    document.getElementById('cmOptions').innerHTML=allOpts.map((pal,i)=>'<div class="cm-opt" data-i="'+i+'" onclick="pickCM(this,'+JSON.stringify(pal).replace(/"/g,"&quot;")+')">'+pal.map(c=>'<div class="cm-swatch" style="background:'+c+'"></div>').join('')+'</div>').join('');
+    document.getElementById('cmOptions').style.display='grid';
+    window._cmAllOpts=allOpts;
+  },3000);
+}
+function pickCM(el,pal){document.querySelectorAll('.cm-opt').forEach(c=>c.classList.remove('selected'));el.classList.add('selected');cmSel=+el.dataset.i;document.getElementById('cmNext').disabled=false}
+function finishColorMemory(){
+  const chosen=window._cmAllOpts[cmSel];
+  const isCorrect=JSON.stringify(chosen)===JSON.stringify(cmTarget);
+  if(isCorrect){S.scores.thinking-=8;S.scores.comm-=5;S.achievements.push('Цветовая память')}
+  awardXP(isCorrect?85:40,'Цвет.память',isCorrect?100:25,'screen-font');
+}
 
 // ===== 7. FONT =====
 const fontData=[{head:'Times New Roman',body:'Georgia',style:'font-family:Times New Roman,serif',label:'Классическая антиква',axes:{thinking:-10,role:10}},{head:'Helvetica',body:'Arial',style:'font-family:Helvetica,Arial,sans-serif',label:'Нейтральный гротеск',axes:{thinking:-5,comm:-5}},{head:'Playfair Display',body:'Source Sans Pro',style:'font-family:Georgia,serif;letter-spacing:1px',label:'Контрастная пара',axes:{thinking:5,material:5}},{head:'Courier New',body:'Courier',style:'font-family:Courier New,monospace',label:'Моноширинный',axes:{thinking:15,material:-10}}];
@@ -828,7 +1018,65 @@ function drawProportion(){
   ctx.beginPath();ctx.arc(split,H/2,8,0,Math.PI*2);ctx.fillStyle='#fff';ctx.fill();
   document.getElementById('propValue').textContent=Math.round(propRatio)+' : '+(100-Math.round(propRatio));
 }
-function finishProportion(){const golden=61.8;const err=Math.abs(propRatio-golden);const acc=Math.max(0,100-err*3);S.scores.scale+=acc*0.15;S.scores.thinking-=acc*0.1;if(err<5)S.achievements.push('Золотое сечение');const propAcc=Math.max(5,Math.round(100-err*2.5));awardXP(err<5?90:err<15?65:40,'Пропорции',propAcc,'screen-role')}
+function finishProportion(){const golden=61.8;const err=Math.abs(propRatio-golden);const acc=Math.max(0,100-err*3);S.scores.scale+=acc*0.15;S.scores.thinking-=acc*0.1;if(err<5)S.achievements.push('Золотое сечение');const propAcc=Math.max(5,Math.round(100-err*2.5));awardXP(err<5?90:err<15?65:40,'Пропорции',propAcc,'screen-spatial')}
+
+// ===== SPATIAL THINKING =====
+const spatialUnfoldSvg='<svg width="200" height="160" viewBox="0 0 200 160" xmlns="http://www.w3.org/2000/svg"><rect x="60" y="0" width="50" height="50" fill="none" stroke="#00e5ff" stroke-width="2" stroke-dasharray="4"/><rect x="60" y="50" width="50" height="50" fill="none" stroke="#00e5ff" stroke-width="2"/><rect x="0" y="50" width="60" height="50" fill="none" stroke="#00e5ff" stroke-width="2" stroke-dasharray="4"/><rect x="110" y="50" width="60" height="50" fill="none" stroke="#00e5ff" stroke-width="2" stroke-dasharray="4"/><rect x="60" y="100" width="50" height="50" fill="none" stroke="#00e5ff" stroke-width="2" stroke-dasharray="4"/><text x="85" y="80" text-anchor="middle" fill="#00e5ff" font-size="10" font-family="sans-serif">ОСНОВА</text></svg>';
+const spatialOpts=[
+  {label:'Куб',svg:'<svg width="80" height="80" viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg"><polygon points="20,25 50,10 70,25 70,55 40,70 20,55" fill="rgba(0,229,255,0.1)" stroke="#00e5ff" stroke-width="1.5"/><line x1="40" y1="40" x2="40" y2="70" stroke="#00e5ff" stroke-width="1" opacity="0.5"/><line x1="40" y1="40" x2="70" y2="25" stroke="#00e5ff" stroke-width="1" opacity="0.5"/><line x1="40" y1="40" x2="20" y2="25" stroke="#00e5ff" stroke-width="1" opacity="0.5"/></svg>',correct:true,axes:{scale:8,thinking:-8}},
+  {label:'Пирамида',svg:'<svg width="80" height="80" viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg"><polygon points="40,10 65,65 15,65" fill="rgba(179,136,255,0.1)" stroke="#b388ff" stroke-width="1.5"/><line x1="40" y1="10" x2="55" y2="45" stroke="#b388ff" stroke-width="1" opacity="0.5"/></svg>',correct:false,axes:{scale:5}},
+  {label:'Цилиндр',svg:'<svg width="80" height="80" viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg"><ellipse cx="40" cy="20" rx="25" ry="10" fill="none" stroke="#ff6b9d" stroke-width="1.5"/><line x1="15" y1="20" x2="15" y2="60" stroke="#ff6b9d" stroke-width="1.5"/><line x1="65" y1="20" x2="65" y2="60" stroke="#ff6b9d" stroke-width="1.5"/><ellipse cx="40" cy="60" rx="25" ry="10" fill="rgba(255,107,157,0.1)" stroke="#ff6b9d" stroke-width="1.5"/></svg>',correct:false,axes:{thinking:5}},
+  {label:'Призма',svg:'<svg width="80" height="80" viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg"><polygon points="40,10 65,30 55,70 25,70 15,30" fill="rgba(251,191,36,0.1)" stroke="#fbbf24" stroke-width="1.5"/><line x1="40" y1="10" x2="40" y2="50" stroke="#fbbf24" stroke-width="1" opacity="0.5"/></svg>',correct:false,axes:{material:5}}
+];
+let spatSel=-1;
+function initSpatial(){
+  spatSel=-1;
+  document.getElementById('spatialUnfold').innerHTML=spatialUnfoldSvg;
+  document.getElementById('spatialOpts').innerHTML=spatialOpts.map((o,i)=>'<div class="spatial-opt" data-i="'+i+'" onclick="pickSpatial(this)">'+o.svg+'<div class="spatial-opt-label">'+o.label+'</div></div>').join('');
+  document.getElementById('spatialNext').disabled=true;
+}
+function pickSpatial(el){document.querySelectorAll('.spatial-opt').forEach(c=>c.classList.remove('selected'));el.classList.add('selected');spatSel=+el.dataset.i;document.getElementById('spatialNext').disabled=false}
+function finishSpatial(){
+  const o=spatialOpts[spatSel];
+  if(o.axes)Object.keys(o.axes).forEach(k=>{S.scores[k]+=o.axes[k]});
+  if(o.correct)S.achievements.push('3D-мышление');
+  awardXP(o.correct?85:45,'Пространство',o.correct?100:20,'screen-stylefunction');
+}
+
+// ===== STYLE VS FUNCTION =====
+const sfChairs={
+  a:{label:'Стул А — Дизайнерский',desc:'Красивый, авторский, неудобный',svg:'<svg width="80" height="80" viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg"><path d="M25,65 L25,35 Q25,15 40,15 Q55,15 55,35 L55,65" fill="none" stroke="#ff6b9d" stroke-width="2"/><line x1="20" y1="65" x2="60" y2="65" stroke="#ff6b9d" stroke-width="2"/><path d="M30,35 Q40,25 50,35" fill="none" stroke="#ff6b9d" stroke-width="1.5" opacity="0.5"/></svg>'},
+  b:{label:'Стул Б — Эргономичный',desc:'Удобный, практичный, обычный',svg:'<svg width="80" height="80" viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg"><rect x="25" y="15" width="30" height="25" rx="3" fill="none" stroke="#00e5ff" stroke-width="2"/><rect x="28" y="40" width="24" height="15" rx="2" fill="none" stroke="#00e5ff" stroke-width="2"/><line x1="28" y1="55" x2="28" y2="70" stroke="#00e5ff" stroke-width="2"/><line x1="52" y1="55" x2="52" y2="70" stroke="#00e5ff" stroke-width="2"/></svg>'}
+};
+const sfContexts=[
+  {label:'Кафе',q:'Какой стул поставишь в модном кафе?'},
+  {label:'Дом',q:'Какой стул купишь для домашнего рабочего стола?'},
+  {label:'Выставка',q:'Какой стул покажешь на выставке дизайна?'}
+];
+let sfAnswers=[];
+function initStyleFunction(){
+  sfAnswers=new Array(sfContexts.length).fill(null);
+  document.getElementById('sfDesc').textContent='Два стула. Один красивый, но неудобный. Другой удобный, но обычный. Что выберешь в разных ситуациях?';
+  document.getElementById('sfPair').innerHTML='<div class="sf-chair">'+sfChairs.a.svg+'<div class="sf-chair-label">'+sfChairs.a.label+'</div><div class="sf-chair-desc">'+sfChairs.a.desc+'</div></div><div class="sf-chair">'+sfChairs.b.svg+'<div class="sf-chair-label">'+sfChairs.b.label+'</div><div class="sf-chair-desc">'+sfChairs.b.desc+'</div></div>';
+  document.getElementById('sfContexts').innerHTML=sfContexts.map((c,ci)=>'<div class="sf-context"><div class="sf-context-label">'+c.label+'</div><div class="sf-context-q">'+c.q+'</div><div class="sf-btns"><div class="sf-btn" data-ctx="'+ci+'" data-v="a" onclick="pickSF(this)">Стул А</div><div class="sf-btn" data-ctx="'+ci+'" data-v="b" onclick="pickSF(this)">Стул Б</div></div></div>').join('');
+  document.getElementById('sfNext').disabled=true;
+}
+function pickSF(el){
+  const ctx=+el.dataset.ctx,v=el.dataset.v;
+  el.parentElement.querySelectorAll('.sf-btn').forEach(b=>b.classList.remove('selected'));
+  el.classList.add('selected');
+  sfAnswers[ctx]=v;
+  document.getElementById('sfNext').disabled=sfAnswers.includes(null);
+}
+function finishStyleFunction(){
+  const styleCount=sfAnswers.filter(a=>a==='a').length;
+  if(styleCount>=2){S.scores.thinking+=10;S.scores.material+=5}
+  else{S.scores.thinking-=8;S.scores.role+=5}
+  if(styleCount===3)S.achievements.push('Эстет');
+  if(styleCount===0)S.achievements.push('Прагматик');
+  const sfAcc=Math.round((Math.abs(styleCount-1.5)/1.5)*100);
+  awardXP(60,'Стиль',sfAcc,'screen-role');
+}
 
 // ===== 10. ROLE =====
 const roleScenarios=[
