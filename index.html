@@ -119,7 +119,7 @@ body.no-scroll{overflow:hidden!important;position:fixed;width:100%;top:0;left:0}
 .assembly-palette{background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:16px}
 .assembly-palette-title{font-size:12px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--muted);margin-bottom:12px}
 .assembly-blocks{display:flex;flex-direction:column;gap:8px}
-.assembly-block{background:var(--surface2);border:1px solid var(--border);border-radius:8px;padding:12px 16px;cursor:pointer;transition:all .2s;font-size:14px;display:flex;align-items:center;gap:10px;user-select:none}
+.assembly-block{background:var(--surface2);border:1px solid var(--border);border-radius:8px;padding:8px;cursor:pointer;transition:all .2s;font-size:14px;user-select:none;overflow:hidden}
 .assembly-block:hover{border-color:var(--cyan)}
 .assembly-canvas{background:var(--surface);border:2px dashed var(--border);border-radius:14px;padding:12px;min-height:220px;display:flex;flex-direction:column;gap:6px;transition:border-color .3s}
 .assembly-canvas.over{border-color:var(--cyan)}
@@ -670,32 +670,32 @@ function pickArg(el){document.querySelectorAll('#argGrid .arg-chip').forEach(c=>
 function finishChoice(){const cAxes=choiceData.options[choiceSel].axes,aAxes=choiceData.arguments[argSel].axes;Object.keys(cAxes).forEach(k=>{S.scores[k]+=cAxes[k]});Object.keys(aAxes).forEach(k=>{S.scores[k]+=aAxes[k]});S.achievements.push('Насмотренный');awardXP(60,'Насмотренность',null,'screen-moodboard')}
 
 // ===== 2.5. MOODBOARD =====
-const P='https://picsum.photos/id/';const PQ='/240/240';
+const I='img/';
 const moodItems=[
-  {img:P+'119'+PQ,label:'Античные колонны',axes:{scale:8,material:5}},
-  {img:P+'83'+PQ,label:'Небоскрёб на закате',axes:{scale:10,material:3}},
-  {img:P+'0'+PQ,label:'Чертёж и план',axes:{scale:8,thinking:-6}},
-  {img:P+'376'+PQ,label:'Уютная гостиная',axes:{scale:5,material:5,thinking:5}},
-  {img:P+'188'+PQ,label:'Лофт-кафе',axes:{scale:5,material:5,thinking:5}},
-  {img:P+'48'+PQ,label:'Интерфейс приложения',axes:{material:-10,comm:-8}},
-  {img:P+'292'+PQ,label:'Яркий плакат',axes:{comm:-8,thinking:8}},
-  {img:P+'447'+PQ,label:'Неоновая вывеска',axes:{comm:-6,thinking:5,material:-3}},
-  {img:P+'15'+PQ,label:'Цифровая инсталляция',axes:{material:-12,thinking:5}},
-  {img:P+'366'+PQ,label:'Модный показ',axes:{material:10,thinking:10}},
-  {img:P+'160'+PQ,label:'Ювелирное украшение',axes:{material:10,thinking:10,scale:-6}},
-  {img:P+'164'+PQ,label:'Текстильный паттерн',axes:{material:8,thinking:8}},
-  {img:P+'250'+PQ,label:'Fashion-аксессуар',axes:{material:8,thinking:6}},
-  {img:P+'96'+PQ,label:'Дизайнерское кресло',axes:{material:5,scale:3,thinking:-4}},
-  {img:P+'593'+PQ,label:'Промышленный объект',axes:{material:5,thinking:-8}},
-  {img:P+'28'+PQ,label:'Авторский транспорт',axes:{material:5,scale:3,thinking:-3}},
-  {img:P+'667'+PQ,label:'Выставочное пространство',axes:{role:8,scale:5}},
-  {img:P+'42'+PQ,label:'Бренд-стратегия',axes:{role:10,thinking:-8}},
-  {img:P+'169'+PQ,label:'Рабочий процесс',axes:{role:10,comm:-6}},
-  {img:P+'24'+PQ,label:'Вёрстка и типографика',axes:{comm:-8,material:-5}},
-  {img:P+'49'+PQ,label:'Загородная архитектура',axes:{scale:8,material:8}},
-  {img:P+'10'+PQ,label:'Ландшафтный дизайн',axes:{scale:8,material:5}},
-  {img:P+'274'+PQ,label:'Витрина бутика',axes:{material:5,thinking:5,comm:-3}},
-  {img:P+'659'+PQ,label:'Сценография',axes:{scale:5,thinking:8,role:3}}
+  {img:I+'119.jpg',label:'Античные колонны',axes:{scale:8,material:5}},
+  {img:I+'83.jpg',label:'Небоскрёб на закате',axes:{scale:10,material:3}},
+  {img:I+'0.jpg',label:'Чертёж и план',axes:{scale:8,thinking:-6}},
+  {img:I+'376.jpg',label:'Уютная гостиная',axes:{scale:5,material:5,thinking:5}},
+  {img:I+'188.jpg',label:'Лофт-кафе',axes:{scale:5,material:5,thinking:5}},
+  {img:I+'48.jpg',label:'Интерфейс приложения',axes:{material:-10,comm:-8}},
+  {img:I+'292.jpg',label:'Яркий плакат',axes:{comm:-8,thinking:8}},
+  {img:I+'447.jpg',label:'Неоновая вывеска',axes:{comm:-6,thinking:5,material:-3}},
+  {img:I+'15.jpg',label:'Цифровая инсталляция',axes:{material:-12,thinking:5}},
+  {img:I+'366.jpg',label:'Модный показ',axes:{material:10,thinking:10}},
+  {img:I+'160.jpg',label:'Ювелирное украшение',axes:{material:10,thinking:10,scale:-6}},
+  {img:I+'164.jpg',label:'Текстильный паттерн',axes:{material:8,thinking:8}},
+  {img:I+'250.jpg',label:'Fashion-аксессуар',axes:{material:8,thinking:6}},
+  {img:I+'96.jpg',label:'Дизайнерское кресло',axes:{material:5,scale:3,thinking:-4}},
+  {img:I+'593.jpg',label:'Промышленный объект',axes:{material:5,thinking:-8}},
+  {img:I+'28.jpg',label:'Авторский транспорт',axes:{material:5,scale:3,thinking:-3}},
+  {img:I+'667.jpg',label:'Выставочное пространство',axes:{role:8,scale:5}},
+  {img:I+'42.jpg',label:'Бренд-стратегия',axes:{role:10,thinking:-8}},
+  {img:I+'169.jpg',label:'Рабочий процесс',axes:{role:10,comm:-6}},
+  {img:I+'24.jpg',label:'Вёрстка и типографика',axes:{comm:-8,material:-5}},
+  {img:I+'49.jpg',label:'Загородная архитектура',axes:{scale:8,material:8}},
+  {img:I+'10.jpg',label:'Ландшафтный дизайн',axes:{scale:8,material:5}},
+  {img:I+'274.jpg',label:'Витрина бутика',axes:{material:5,thinking:5,comm:-3}},
+  {img:I+'659.jpg',label:'Сценография',axes:{scale:5,thinking:8,role:3}}
 ];
 let moodSel=[];
 function initMoodboard(){
@@ -764,7 +764,7 @@ const asmBlockData=[
 let asmOrder=[];
 function initAssembly(){
   asmOrder=[];const blocks=document.getElementById('asmBlocks');
-  blocks.innerHTML=asmBlockData.map(b=>'<div class="assembly-block" data-id="'+b.id+'" onclick="addBlock(\''+b.id+'\')"><div style="font-size:1.1rem;line-height:1">'+b.icon+'</div><div>'+b.label+'</div></div>').join('');
+  blocks.innerHTML=asmBlockData.map(b=>'<div class="assembly-block" data-id="'+b.id+'" onclick="addBlock(\''+b.id+'\')"><div style="margin-bottom:6px">'+b.wire+'</div><div style="font-size:12px;font-weight:600;text-align:center">'+b.label+'</div></div>').join('');
   document.getElementById('asmCanvas').innerHTML='<div class="assembly-canvas-title">Макет лендинга</div><div style="text-align:center;padding:20px;color:var(--muted);font-size:13px">Нажимай блоки слева →</div>';
 }
 function addBlock(id){
@@ -872,7 +872,7 @@ function finishRole(){
 }
 
 // ===== 11. DREAM =====
-const dreamProjects=[{img:P+'58'+PQ,label:'Спроектировать дом у моря',axes:{scale:20,material:15}},{img:P+'366'+PQ,label:'Создать бренд одежды',axes:{material:20,thinking:15}},{img:P+'48'+PQ,label:'Приложение для музея',axes:{material:-20,comm:-15}},{img:P+'96'+PQ,label:'Линейка мебели',axes:{material:10,scale:5}},{img:P+'119'+PQ,label:'Организовать выставку',axes:{role:25,thinking:-5}},{img:P+'160'+PQ,label:'Ювелирная коллекция',axes:{material:20,thinking:20}},{img:P+'188'+PQ,label:'Интерьер ресторана',axes:{scale:15,material:10}},{img:P+'15'+PQ,label:'AR-инсталляция',axes:{material:-15,thinking:10}}];
+const dreamProjects=[{img:I+'58.jpg',label:'Спроектировать дом у моря',axes:{scale:20,material:15}},{img:I+'366.jpg',label:'Создать бренд одежды',axes:{material:20,thinking:15}},{img:I+'48.jpg',label:'Приложение для музея',axes:{material:-20,comm:-15}},{img:I+'96.jpg',label:'Линейка мебели',axes:{material:10,scale:5}},{img:I+'119.jpg',label:'Организовать выставку',axes:{role:25,thinking:-5}},{img:I+'160.jpg',label:'Ювелирная коллекция',axes:{material:20,thinking:20}},{img:I+'188.jpg',label:'Интерьер ресторана',axes:{scale:15,material:10}},{img:I+'15.jpg',label:'AR-инсталляция',axes:{material:-15,thinking:10}}];
 function initDream(){S._dreamSel=[];document.getElementById('dreamGrid').innerHTML=dreamProjects.map((p,i)=>'<div class="choice-card" data-i="'+i+'" onclick="pickDream(this)"><div class="choice-img"><img src="'+p.img+'" loading="lazy" alt="'+p.label+'"></div><div class="choice-label">'+p.label+'</div></div>').join('');document.getElementById('dreamNext').disabled=true}
 function pickDream(el){const idx=+el.dataset.i;const pos=S._dreamSel.indexOf(idx);if(pos>-1){S._dreamSel.splice(pos,1);el.classList.remove('selected')}else if(S._dreamSel.length<2){S._dreamSel.push(idx);el.classList.add('selected')}document.getElementById('dreamNext').disabled=S._dreamSel.length!==2}
 
