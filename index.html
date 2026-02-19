@@ -29,7 +29,8 @@ body{font-family:'Gilroy','Helvetica Neue',sans-serif;background:var(--dark);col
 .xp-hud{position:fixed;top:12px;right:16px;z-index:101;background:rgba(34,34,34,0.92);backdrop-filter:blur(12px);border:1px solid var(--border);border-radius:20px;padding:6px 16px 6px 10px;opacity:0;transform:translateY(-20px);transition:all .5s ease;pointer-events:none;overflow:hidden}
 .xp-hud.visible{opacity:1;transform:translateY(0);pointer-events:auto}
 .xp-hud-main{display:flex;align-items:center;gap:12px}
-.xp-hud-lvl{width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'PPNeueMachina',sans-serif;font-weight:800;font-size:14px;background:linear-gradient(135deg,var(--cyan),var(--purple));color:var(--dark);flex-shrink:0}
+.xp-hud-lvl{width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'PPNeueMachina',sans-serif;font-weight:800;font-size:14px;background:linear-gradient(135deg,var(--cyan),var(--purple));color:var(--dark);flex-shrink:0;overflow:hidden}
+.xp-hud-lvl img{width:100%;height:100%;object-fit:cover;display:block}
 .xp-hud-info{display:flex;flex-direction:column;gap:2px}
 .xp-hud-name{font-size:12px;font-weight:700;color:var(--white);line-height:1}
 .xp-hud-bar{width:100px;height:4px;background:rgba(255,255,255,0.1);border-radius:2px;overflow:hidden}
@@ -367,7 +368,7 @@ body.no-scroll{overflow:hidden!important;position:fixed;width:100%;top:0;left:0}
   <div class="xp-hud-main">
     <div class="xp-hud-lvl" id="hudLvl">1</div>
     <div class="xp-hud-info">
-      <div class="xp-hud-name" id="hudName">Новичок</div>
+      <div class="xp-hud-name" id="hudName">1 уровень</div>
       <div class="xp-hud-bar"><div class="xp-hud-fill" id="hudFill"></div></div>
     </div>
     <div class="xp-hud-xp" id="hudXp">0&nbsp;XP</div>
@@ -648,11 +649,19 @@ const levelSubs = ['','Только начинаешь путь','Первые �
 function calcLevel(xp){for(let i=xpPerLevel.length-1;i>=1;i--){if(xp>=xpPerLevel[i])return i}return 1}
 function xpProgress(xp,lvl){if(lvl>=10)return 100;const cur=xpPerLevel[lvl],next=xpPerLevel[lvl+1];return((xp-cur)/(next-cur))*100}
 
-function showHud(){document.getElementById('xpHud').classList.add('visible')}
+function showHud(){
+  document.getElementById('xpHud').classList.add('visible');
+  // Put TG avatar into HUD circle
+  const hudLvl=document.getElementById('hudLvl');
+  if(tg&&tg.initDataUnsafe&&tg.initDataUnsafe.user&&tg.initDataUnsafe.user.photo_url){
+    hudLvl.innerHTML='<img src="'+tg.initDataUnsafe.user.photo_url+'" alt="">';
+  }
+}
 function updateHud(){
   const lvl=calcLevel(XP.total);const oldLvl=XP.level;const leveled=lvl>oldLvl;const fill=document.getElementById('hudFill');
-  if(leveled){fill.style.width='100%';setTimeout(()=>{fill.style.transition='none';fill.style.width='0%';XP.level=lvl;document.getElementById('hudLvl').textContent=lvl;document.getElementById('hudName').textContent=levelNames[lvl];document.getElementById('hudXp').textContent=XP.total+' XP';requestAnimationFrame(()=>{fill.style.transition='width .8s cubic-bezier(.4,0,.2,1)';fill.style.width=xpProgress(XP.total,lvl)+'%'})},600)}
-  else{XP.level=lvl;document.getElementById('hudLvl').textContent=lvl;document.getElementById('hudName').textContent=levelNames[lvl];document.getElementById('hudXp').textContent=XP.total+' XP';fill.style.width=xpProgress(XP.total,lvl)+'%'}
+  function setLvl(l){XP.level=l;document.getElementById('hudName').textContent=l+' уровень';document.getElementById('hudXp').textContent=XP.total+'\u00a0XP'}
+  if(leveled){fill.style.width='100%';setTimeout(()=>{fill.style.transition='none';fill.style.width='0%';setLvl(lvl);requestAnimationFrame(()=>{fill.style.transition='width .8s cubic-bezier(.4,0,.2,1)';fill.style.width=xpProgress(XP.total,lvl)+'%'})},600)}
+  else{setLvl(lvl);fill.style.width=xpProgress(XP.total,lvl)+'%'}
   return leveled;
 }
 
