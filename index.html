@@ -183,16 +183,26 @@ body.no-scroll{overflow:hidden!important;position:fixed;width:100%;top:0;left:0}
 .sa-opt:hover{border-color:var(--cyan)}
 .sa-opt.selected{border-color:var(--green);background:rgba(74,222,128,0.06)}
 
-/* MOODBOARD */
-.mood-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(100px,1fr));gap:8px;margin-top:10px}
-.mood-item{background:var(--surface);border:2px solid var(--border);border-radius:12px;overflow:hidden;cursor:pointer;transition:all .3s}
-.mood-item:hover{border-color:var(--cyan);transform:translateY(-2px)}
-.mood-item.selected{border-color:var(--green);background:rgba(74,222,128,0.06);box-shadow:0 0 16px rgba(74,222,128,0.1)}
-.mood-img{width:100%;aspect-ratio:1;object-fit:cover;display:block;background:var(--surface2)}
-.mood-emoji{font-size:2.5rem;display:flex;align-items:center;justify-content:center;width:100%;aspect-ratio:1;background:var(--surface2)}
-.mood-label{font-size:11px;font-weight:700;line-height:1.3;color:var(--muted);padding:10px 8px;text-align:center}
-.mood-counter{text-align:center;margin-top:16px;font-size:14px;color:var(--muted)}
-.mood-counter .hl{color:var(--cyan);font-weight:700}
+/* MOODBOARD — SWIPE */
+.mood-swipe-wrap{position:relative;width:280px;height:360px;margin:16px auto 0}
+.mood-card{position:absolute;inset:0;background:var(--surface);border:2px solid var(--border);border-radius:16px;overflow:hidden;touch-action:none;user-select:none;-webkit-user-select:none;transition:transform .35s ease,opacity .35s ease;will-change:transform}
+.mood-card img{width:100%;height:280px;object-fit:cover;display:block;pointer-events:none}
+.mood-card .mood-card-label{font-size:13px;font-weight:700;color:var(--muted);padding:12px;text-align:center;line-height:1.3}
+.mood-card .mood-stamp{position:absolute;top:20px;font-size:28px;font-weight:900;padding:6px 16px;border:4px solid;border-radius:8px;opacity:0;transition:opacity .15s;pointer-events:none;transform:rotate(-15deg)}
+.mood-card .mood-stamp.like{left:16px;color:var(--green);border-color:var(--green)}
+.mood-card .mood-stamp.nope{right:16px;color:#f44;border-color:#f44;transform:rotate(15deg)}
+.mood-card.swiping-right .mood-stamp.like{opacity:1}
+.mood-card.swiping-left .mood-stamp.nope{opacity:1}
+.mood-card.fly-left{transform:translateX(-140%) rotate(-20deg);opacity:0;transition:transform .4s ease,opacity .4s ease}
+.mood-card.fly-right{transform:translateX(140%) rotate(20deg);opacity:0;transition:transform .4s ease,opacity .4s ease}
+.mood-swipe-hint{display:flex;justify-content:center;gap:40px;margin-top:16px}
+.mood-swipe-hint span{font-size:13px;color:var(--muted)}
+.mood-progress{text-align:center;margin-top:12px;font-size:14px;color:var(--muted)}
+.mood-progress .hl{color:var(--cyan);font-weight:700}
+.mood-btns{display:flex;justify-content:center;gap:24px;margin-top:12px}
+.mood-btn{width:56px;height:56px;border-radius:50%;border:2px solid var(--border);background:var(--surface);font-size:24px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .2s}
+.mood-btn.nope:active{border-color:#f44;background:rgba(244,67,67,0.1)}
+.mood-btn.like:active{border-color:var(--green);background:rgba(74,222,128,0.1)}
 
 /* ROLE */
 .role-scenario{background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:16px;margin-bottom:12px}
@@ -443,10 +453,11 @@ body.no-scroll{overflow:hidden!important;position:fixed;width:100%;top:0;left:0}
 <div class="screen" id="screen-moodboard">
   <div class="module-tag">Модуль 5 · Мудборд</div>
   <div class="module-title">Доска вдохновения</div>
-  <div class="module-desc">Выбери до&nbsp;5&nbsp;картинок, которые тебя вдохновляют&nbsp;— не&nbsp;думай долго, иди за&nbsp;интуицией.</div>
-  <div class="mood-grid" id="moodGrid"></div>
-  <div class="mood-counter" id="moodCounter">Выбрано: <span class="hl">0</span> / 5</div>
-  <div class="btn-row"><button class="btn" id="moodNext" disabled onclick="finishMoodboard()">Далее →</button></div>
+  <div class="module-desc">Смахивай вправо, если нравится, влево&nbsp;— если нет. Не&nbsp;думай долго, иди за&nbsp;интуицией</div>
+  <div class="mood-swipe-wrap" id="moodSwipeWrap"></div>
+  <div class="mood-swipe-hint"><span>👈 Не моё</span><span>Нравится 👉</span></div>
+  <div class="mood-btns"><button class="mood-btn nope" onclick="moodBtnSwipe('left')">✕</button><button class="mood-btn like" onclick="moodBtnSwipe('right')">♥</button></div>
+  <div class="mood-progress" id="moodProgress"></div>
 </div>
 
 <!-- SCREEN: MATERIALS -->
@@ -813,7 +824,7 @@ const moodItems=[
   {img:I+'366.jpg',label:'Модный показ',axes:{material:10,thinking:10}},
   {img:I+'160.jpg',label:'Ювелирное украшение',axes:{material:10,thinking:10,scale:-6}},
   {img:I+'164.jpg',label:'Текстильный паттерн',axes:{material:8,thinking:8}},
-  {img:I+'250.jpg',label:'Fashion-аксессуар',axes:{material:8,thinking:6}},
+  {img:I+'250.jpg',label:'Модный аксессуар',axes:{material:8,thinking:6}},
   {img:I+'96.jpg',label:'Дизайнерское кресло',axes:{material:5,scale:3,thinking:-4}},
   {img:I+'593.jpg',label:'Промышленный объект',axes:{material:5,thinking:-8}},
   {img:I+'28.jpg',label:'Авторский транспорт',axes:{material:5,scale:3,thinking:-3}},
@@ -827,19 +838,78 @@ const moodItems=[
   {img:I+'659.jpg',label:'Сценография',axes:{scale:5,thinking:8,role:3}}
 ];
 let moodSel=[];
+let moodDeck=[],moodCur=0,moodSwiping=false;
+function shuffle(a){for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a}
 function initMoodboard(){
-  moodSel=[];
-  document.getElementById('moodGrid').innerHTML=moodItems.map((m,i)=>'<div class="mood-item" data-i="'+i+'" onclick="pickMood(this)"><img class="mood-img" src="'+m.img+'" loading="lazy" alt="'+m.label+'"><div class="mood-label">'+m.label+'</div></div>').join('');
-  document.getElementById('moodCounter').innerHTML='Выбрано: <span class="hl">0</span> / 5';
-  document.getElementById('moodNext').disabled=true;
+  moodSel=[];moodCur=0;moodSwiping=false;
+  moodDeck=shuffle(moodItems.map((m,i)=>({...m,origIdx:i})));
+  const wrap=document.getElementById('moodSwipeWrap');
+  wrap.innerHTML='';
+  renderMoodCards();
+  updateMoodProgress();
 }
-function pickMood(el){
-  const idx=+el.dataset.i;
-  const pos=moodSel.indexOf(idx);
-  if(pos>-1){moodSel.splice(pos,1);el.classList.remove('selected')}
-  else if(moodSel.length<5){moodSel.push(idx);el.classList.add('selected')}
-  document.getElementById('moodCounter').innerHTML='Выбрано: <span class="hl">'+moodSel.length+'</span> / 5';
-  document.getElementById('moodNext').disabled=moodSel.length<3;
+function renderMoodCards(){
+  const wrap=document.getElementById('moodSwipeWrap');
+  wrap.innerHTML='';
+  for(let i=Math.min(moodCur+2,moodDeck.length-1);i>=moodCur;i--){
+    const m=moodDeck[i];
+    const card=document.createElement('div');
+    card.className='mood-card';
+    card.dataset.idx=i;
+    card.innerHTML='<div class="mood-stamp like">LIKE</div><div class="mood-stamp nope">NOPE</div><img src="'+m.img+'" alt="'+m.label+'"><div class="mood-card-label">'+m.label+'</div>';
+    if(i===moodCur)initSwipeCard(card);
+    wrap.appendChild(card);
+  }
+}
+function initSwipeCard(card){
+  let startX=0,startY=0,dx=0,moved=false;
+  card.addEventListener('pointerdown',e=>{
+    if(moodSwiping)return;
+    card.setPointerCapture(e.pointerId);
+    startX=e.clientX;startY=e.clientY;dx=0;moved=false;
+    card.style.transition='none';
+  });
+  card.addEventListener('pointermove',e=>{
+    if(!card.hasPointerCapture(e.pointerId))return;
+    dx=e.clientX-startX;
+    const dy=e.clientY-startY;
+    moved=moved||Math.abs(dx)>5;
+    const rot=dx*0.08;
+    card.style.transform='translateX('+dx+'px) rotate('+rot+'deg)';
+    card.classList.toggle('swiping-right',dx>40);
+    card.classList.toggle('swiping-left',dx<-40);
+  });
+  card.addEventListener('pointerup',e=>{
+    if(!moved){card.style.transition='';card.style.transform='';return}
+    if(Math.abs(dx)>80){
+      resolveSwipe(dx>0?'right':'left');
+    }else{
+      card.style.transition='transform .3s ease';
+      card.style.transform='';
+      card.classList.remove('swiping-right','swiping-left');
+    }
+  });
+}
+function moodBtnSwipe(dir){if(!moodSwiping&&moodCur<moodDeck.length)resolveSwipe(dir)}
+function resolveSwipe(dir){
+  moodSwiping=true;
+  const wrap=document.getElementById('moodSwipeWrap');
+  const card=wrap.querySelector('.mood-card[data-idx="'+moodCur+'"]');
+  if(!card){moodSwiping=false;return}
+  card.classList.add(dir==='right'?'fly-right':'fly-left');
+  if(dir==='right'){moodSel.push(moodDeck[moodCur].origIdx)}
+  moodCur++;
+  updateMoodProgress();
+  setTimeout(()=>{
+    moodSwiping=false;
+    if(moodCur>=moodDeck.length){finishMoodboard();return}
+    renderMoodCards();
+  },400);
+}
+function updateMoodProgress(){
+  const total=moodDeck.length;
+  const liked=moodSel.length;
+  document.getElementById('moodProgress').innerHTML='<span class="hl">'+liked+'</span> нравится · '+(moodCur)+'/'+total;
 }
 function finishMoodboard(){
   moodSel.forEach(idx=>{
