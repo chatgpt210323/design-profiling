@@ -1111,8 +1111,8 @@ function ldShow(){
     c.addEventListener('pointerdown',ldDown);c.addEventListener('pointermove',ldMove);c.addEventListener('pointerup',ldUp);
   },5000);
 }
-function ldDown(e){ldDrawing=true;const r=e.target.getBoundingClientRect();ldLastX=e.clientX-r.left;ldLastY=e.clientY-r.top;e.target.setPointerCapture(e.pointerId)}
-function ldMove(e){if(!ldDrawing)return;const r=e.target.getBoundingClientRect();const x=e.clientX-r.left,y=e.clientY-r.top;ldCtx.beginPath();ldCtx.moveTo(ldLastX,ldLastY);ldCtx.lineTo(x,y);ldCtx.strokeStyle=ldMode==='pen'?'#00e5ff':'#1a1a1a';ldCtx.lineWidth=ldMode==='pen'?3:16;ldCtx.stroke();ldLastX=x;ldLastY=y}
+function ldDown(e){e.preventDefault();ldDrawing=true;const r=e.target.getBoundingClientRect();ldLastX=e.clientX-r.left;ldLastY=e.clientY-r.top;e.target.setPointerCapture(e.pointerId)}
+function ldMove(e){e.preventDefault();if(!ldDrawing)return;const r=e.target.getBoundingClientRect();const x=e.clientX-r.left,y=e.clientY-r.top;ldCtx.beginPath();ldCtx.moveTo(ldLastX,ldLastY);ldCtx.lineTo(x,y);ldCtx.strokeStyle=ldMode==='pen'?'#00e5ff':'#1a1a1a';ldCtx.lineWidth=ldMode==='pen'?3:16;ldCtx.stroke();ldLastX=x;ldLastY=y}
 function ldUp(){ldDrawing=false}
 function ldTool(t,btn){ldMode=t;document.querySelectorAll('#ldDrawWrap .draw-toolbar button').forEach(b=>b.classList.remove('active'));btn.classList.add('active')}
 function ldClear(){ldCtx.fillStyle='#1a1a1a';ldCtx.fillRect(0,0,ldCtx.canvas.width,ldCtx.canvas.height)}
