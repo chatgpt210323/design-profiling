@@ -701,7 +701,7 @@ function go(id){
   document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
   document.getElementById(id).classList.add('active');
   // Lock/unlock scroll for drawing screens
-  if(id==='screen-proportion'||id==='screen-kerning'||id==='screen-draw'){document.body.classList.add('no-scroll')}else{document.body.classList.remove('no-scroll')}
+  if(id==='screen-proportion'||id==='screen-kerning'||id==='screen-draw'||id==='screen-moodboard'){document.body.classList.add('no-scroll')}else{document.body.classList.remove('no-scroll')}
   window.scrollTo(0,0);currentScreen=id;
   const idx=screens.indexOf(id);
   document.getElementById('progressBar').style.width=((idx/(screens.length-1))*100)+'%';
@@ -827,9 +827,9 @@ const moodItems=[
   {img:I+'250.jpg',label:'Модный аксессуар',axes:{material:8,thinking:6}},
   {img:I+'96.jpg',label:'Дизайнерское кресло',axes:{material:5,scale:3,thinking:-4}},
   {img:I+'593.jpg',label:'Промышленный объект',axes:{material:5,thinking:-8}},
-  {img:I+'28.jpg',label:'Авторский транспорт',axes:{material:5,scale:3,thinking:-3}},
+  {img:I+'28.jpg',label:'Дизайнерский транспорт',axes:{material:5,scale:3,thinking:-3}},
   {img:I+'667.jpg',label:'Выставочное пространство',axes:{role:8,scale:5}},
-  {img:I+'42.jpg',label:'Бренд-стратегия',axes:{role:10,thinking:-8}},
+  {img:I+'42.jpg',label:'Брендинг',axes:{role:10,thinking:-8}},
   {img:I+'169.jpg',label:'Рабочий процесс',axes:{role:10,comm:-6}},
   {img:I+'24.jpg',label:'Вёрстка и типографика',axes:{comm:-8,material:-5}},
   {img:I+'49.jpg',label:'Загородная архитектура',axes:{scale:8,material:8}},
