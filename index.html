@@ -35,16 +35,16 @@ body{font-family:'Gilroy','Helvetica Neue',sans-serif;background:var(--dark);col
 .xp-hud-fill{height:100%;background:linear-gradient(90deg,var(--cyan),var(--purple));border-radius:2px;transition:width .8s cubic-bezier(.4,0,.2,1);width:0}
 .xp-hud-xp{font-size:12px;font-family:'PPNeueMachina',sans-serif;font-weight:800;color:var(--cyan);line-height:1}
 
-/* XP popup */
-.xp-popup{position:fixed;top:50%;left:50%;z-index:102;background:rgba(34,34,34,0.97);backdrop-filter:blur(16px);border:1px solid var(--cyan);border-radius:20px;padding:28px 36px;opacity:0;transform:translate(-50%,-50%) scale(0.9);transition:all .4s cubic-bezier(.4,0,.2,1);pointer-events:none;min-width:280px;text-align:center;box-shadow:0 0 60px rgba(0,229,255,0.12)}
-.xp-popup.show{opacity:1;transform:translate(-50%,-50%) scale(1)}
-.xp-popup-title{font-family:'PPNeueMachina',sans-serif;font-weight:800;font-size:12px;letter-spacing:2px;text-transform:uppercase;color:var(--cyan);margin-bottom:8px}
-.xp-popup-xp{font-family:'PPNeueMachina',sans-serif;font-weight:800;font-size:22px;color:var(--white);margin-bottom:4px}
-.xp-popup-ach{font-size:13px;color:var(--amber);margin-top:6px}
-.xp-popup-acc{font-family:'PPNeueMachina',sans-serif;font-weight:800;font-size:15px;color:var(--white);margin-bottom:6px}
-.xp-popup-acc-bar{width:100%;height:6px;background:rgba(255,255,255,0.1);border-radius:3px;overflow:hidden;margin-bottom:10px}
-.xp-popup-acc-fill{height:100%;border-radius:3px;transition:width 1s cubic-bezier(.4,0,.2,1);width:0}
-.xp-popup-lvlup{font-family:'PPNeueMachina',sans-serif;font-weight:800;font-size:14px;color:var(--green);margin-top:6px;animation:lvlPulse 1s ease infinite alternate}
+/* XP popup — slides under HUD */
+.xp-popup{position:fixed;top:52px;right:16px;z-index:100;background:rgba(34,34,34,0.97);backdrop-filter:blur(16px);border:1px solid var(--cyan);border-radius:14px;padding:12px 16px;opacity:0;transform:translateY(-10px);transition:all .4s cubic-bezier(.4,0,.2,1);pointer-events:none;min-width:200px;text-align:center;box-shadow:0 4px 24px rgba(0,229,255,0.12)}
+.xp-popup.show{opacity:1;transform:translateY(0)}
+.xp-popup-title{font-family:'PPNeueMachina',sans-serif;font-weight:800;font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--cyan);margin-bottom:4px}
+.xp-popup-xp{font-family:'PPNeueMachina',sans-serif;font-weight:800;font-size:18px;color:var(--white);margin-bottom:2px}
+.xp-popup-ach{font-size:12px;color:var(--amber);margin-top:4px}
+.xp-popup-acc{font-family:'PPNeueMachina',sans-serif;font-weight:800;font-size:13px;color:var(--white);margin-bottom:4px}
+.xp-popup-acc-bar{width:100%;height:4px;background:rgba(255,255,255,0.1);border-radius:2px;overflow:hidden;margin-bottom:6px}
+.xp-popup-acc-fill{height:100%;border-radius:2px;transition:width 1s cubic-bezier(.4,0,.2,1);width:0}
+.xp-popup-lvlup{font-family:'PPNeueMachina',sans-serif;font-weight:800;font-size:12px;color:var(--green);margin-top:4px;animation:lvlPulse 1s ease infinite alternate}
 @keyframes lvlPulse{from{opacity:.7}to{opacity:1}}
 
 .module-tag{display:inline-block;font-family:'PPNeueMachina',sans-serif;font-weight:800;font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--cyan);background:rgba(0,229,255,0.1);padding:5px 14px;border-radius:77px;margin-bottom:10px}
@@ -74,11 +74,13 @@ body{font-family:'Gilroy','Helvetica Neue',sans-serif;background:var(--dark);col
 
 /* KERNING */
 .kerning-workspace{background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:48px 20px;text-align:center;margin-top:20px;touch-action:none}
-.kerning-word{display:inline-flex;align-items:baseline;font-family:'PPNeueMachina',sans-serif;font-size:clamp(3rem,9vw,5.5rem);font-weight:800;user-select:none}
+.kerning-word{display:inline-flex;align-items:baseline;font-family:'PPNeueMachina',sans-serif;font-size:clamp(4rem,12vw,7rem);font-weight:800;user-select:none}
 .kerning-letter{position:relative;cursor:grab;transition:color .2s;padding:0 2px}
 .kerning-letter.dragging{color:var(--cyan);cursor:grabbing}
 .kerning-letter.fixed{cursor:default;color:var(--muted)}
 .kerning-hint{margin-top:20px;font-size:14px;color:var(--muted)}
+.kerning-hint-anim{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);pointer-events:none;z-index:10;opacity:0;animation:kernHint 1.2s ease-in-out forwards}
+@keyframes kernHint{0%{opacity:0;transform:translate(-50%,-50%)}15%{opacity:1;transform:translate(-50%,-50%)}35%{transform:translate(calc(-50% + 20px),-50%);opacity:1}65%{transform:translate(calc(-50% - 20px),-50%);opacity:1}85%{transform:translate(-50%,-50%);opacity:1}100%{opacity:0;transform:translate(-50%,-50%)}}
 
 /* CHOICE */
 .choice-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:12px;margin-top:12px}
@@ -113,6 +115,16 @@ body{font-family:'Gilroy','Helvetica Neue',sans-serif;background:var(--dark);col
 .draw-canvas{border:1px solid var(--border);border-radius:8px;cursor:crosshair;background:#1a1a1a;display:block;margin:0 auto;width:100%;max-width:600px;touch-action:none;-webkit-user-select:none;user-select:none}
 .draw-workspace{touch-action:none}
 body.no-scroll{overflow:hidden!important;position:fixed;width:100%;top:0;left:0}
+
+/* BUILD HOUSE */
+.build-area{display:grid;grid-template-columns:100px 1fr;gap:12px;margin-top:12px}
+.build-palette{display:flex;flex-direction:column;gap:8px;padding:8px;background:var(--surface);border:1px solid var(--border);border-radius:14px}
+.build-shape{width:80px;height:70px;cursor:grab;display:flex;align-items:center;justify-content:center;background:var(--surface2);border:1px solid var(--border);border-radius:10px;transition:all .2s;user-select:none;touch-action:none}
+.build-shape:hover{border-color:var(--cyan)}
+.build-shape svg{pointer-events:none}
+.build-artboard{position:relative;min-height:320px;background:var(--surface);border:2px dashed var(--border);border-radius:14px;overflow:hidden;touch-action:none}
+.build-placed{position:absolute;cursor:grab;touch-action:none;user-select:none}
+.build-placed svg{pointer-events:none}
 
 /* ASSEMBLY (pointer-based for mobile) */
 .assembly-area{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:12px}
@@ -164,7 +176,7 @@ body.no-scroll{overflow:hidden!important;position:fixed;width:100%;top:0;left:0}
 /* SELF-ASSESSMENT */
 .sa-pair{background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:16px;margin-bottom:10px}
 .sa-counter{font-family:'PPNeueMachina',sans-serif;font-size:12px;font-weight:800;letter-spacing:2px;color:var(--muted);margin-bottom:16px}
-.sa-options{display:flex;flex-direction:column;gap:10px}
+.sa-options{display:grid;grid-template-columns:1fr 1fr;gap:10px}
 .sa-opt{background:var(--surface2);border:2px solid var(--border);border-radius:12px;padding:12px 16px;cursor:pointer;transition:all .3s;font-size:14px;line-height:1.4}
 .sa-opt:hover{border-color:var(--cyan)}
 .sa-opt.selected{border-color:var(--green);background:rgba(74,222,128,0.06)}
@@ -337,6 +349,7 @@ body.no-scroll{overflow:hidden!important;position:fixed;width:100%;top:0;left:0}
   .spatial-options{grid-template-columns:1fr 1fr}
   .mat-grid{grid-template-columns:1fr 1fr}
   .cm-options{grid-template-columns:1fr}
+  .sa-options{grid-template-columns:1fr}
 }
 </style>
 </head>
@@ -422,9 +435,9 @@ body.no-scroll{overflow:hidden!important;position:fixed;width:100%;top:0;left:0}
 <div class="screen" id="screen-moodboard">
   <div class="module-tag">Модуль 5 · Мудборд</div>
   <div class="module-title">Доска вдохновения</div>
-  <div class="module-desc">Выбери 5–7 картинок, которые тебя вдохновляют — не думай долго, иди за интуицией</div>
+  <div class="module-desc">Выбери до 5 картинок, которые тебя вдохновляют — не думай долго, иди за интуицией</div>
   <div class="mood-grid" id="moodGrid"></div>
-  <div class="mood-counter" id="moodCounter">Выбрано: <span class="hl">0</span> из 5–7</div>
+  <div class="mood-counter" id="moodCounter">Выбрано: <span class="hl">0</span> / 5</div>
   <div class="btn-row"><button class="btn" id="moodNext" disabled onclick="finishMoodboard()">Далее →</button></div>
 </div>
 
@@ -456,20 +469,14 @@ body.no-scroll{overflow:hidden!important;position:fixed;width:100%;top:0;left:0}
 </div>
 
 <div class="screen" id="screen-draw">
-  <div class="module-tag">Модуль 9 · Рисование</div>
-  <div class="module-title">Нарисуй логотип</div>
-  <div class="module-desc">Кофейня «Зерно» — нарисуй простой знак, который передаёт суть бренда</div>
-  <div class="draw-workspace">
-    <div class="draw-toolbar" id="drawToolbar">
-      <button class="active" onclick="setDrawColor('#ffffff',this)">⚪</button>
-      <button onclick="setDrawColor('#00e5ff',this)">🔵</button>
-      <button onclick="setDrawColor('#ff6b9d',this)">🔴</button>
-      <button onclick="setDrawColor('#fbbf24',this)">🟡</button>
-      <button onclick="setDrawSize(3,this)" data-group="size" class="active">Тонкая</button>
-      <button onclick="setDrawSize(8,this)" data-group="size">Толстая</button>
-      <button onclick="clearDrawCanvas()">✕</button>
+  <div class="module-tag">Модуль 9 · Конструктор</div>
+  <div class="module-title">Собери дом</div>
+  <div class="module-desc">Перетаскивай фигуры на артборд, чтобы собрать дом. Какой — решать тебе.</div>
+  <div class="build-area">
+    <div class="build-palette" id="buildPalette"></div>
+    <div class="build-artboard" id="buildArtboard">
+      <div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);color:var(--muted);font-size:13px;pointer-events:none" id="buildHint">← тяни фигуры сюда</div>
     </div>
-    <canvas class="draw-canvas" id="drawCanvas"></canvas>
   </div>
   <div class="btn-row"><button class="btn" onclick="finishDraw()">Далее →</button></div>
 </div>
@@ -525,7 +532,7 @@ body.no-scroll{overflow:hidden!important;position:fixed;width:100%;top:0;left:0}
 <div class="screen" id="screen-proportion">
   <div class="module-tag">Модуль 15 · Пропорции</div>
   <div class="module-title">Найди золотое сечение</div>
-  <div class="module-desc">Двигай разделитель, чтобы найти идеальную пропорцию прямоугольника</div>
+  <div class="module-desc">Золотое сечение — пропорция ~62:38. Её используют в архитектуре, логотипах и искусстве, потому что глаз воспринимает её как идеальную. Двигай разделитель и поймай её.</div>
   <div class="proportion-workspace">
     <canvas class="proportion-canvas" id="propCanvas"></canvas>
     <div class="proportion-value" id="propValue">50 : 50</div>
@@ -665,8 +672,9 @@ function awardXP(amount,moduleName,accuracy,nextScreen){
   const accBar=document.getElementById('popupAccBar');
   if(accuracy!=null){accBar.style.display='block';const fill=document.getElementById('popupAccFill');fill.style.width='0%';const hue=accuracy<40?0:accuracy<70?40:150;fill.style.background='hsl('+hue+',80%,55%)';setTimeout(()=>{fill.style.width=Math.round(accuracy)+'%'},100)}else{accBar.style.display='none'}
   popup.classList.add('show');
-  const delay=leveled?3200:2500;
-  setTimeout(()=>{popup.classList.remove('show');if(nextScreen)setTimeout(()=>go(nextScreen),300)},delay);
+  if(nextScreen)setTimeout(()=>go(nextScreen),400);
+  const delay=leveled?2400:1800;
+  setTimeout(()=>{popup.classList.remove('show')},delay);
 }
 
 // ===== NAVIGATION =====
@@ -675,7 +683,7 @@ function go(id){
   document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
   document.getElementById(id).classList.add('active');
   // Lock/unlock scroll for drawing screens
-  if(id==='screen-draw'||id==='screen-proportion'||id==='screen-kerning'){document.body.classList.add('no-scroll')}else{document.body.classList.remove('no-scroll')}
+  if(id==='screen-proportion'||id==='screen-kerning'){document.body.classList.add('no-scroll')}else{document.body.classList.remove('no-scroll')}
   window.scrollTo(0,0);currentScreen=id;
   const idx=screens.indexOf(id);
   document.getElementById('progressBar').style.width=((idx/(screens.length-1))*100)+'%';
@@ -752,13 +760,17 @@ function finishSelfAssess(){
 
 // ===== 1. KERNING =====
 function initKerning(){
-  const word='DESIGN',offsets=[0,12,-9,7,-5,0],movable=[1,2,3,4];
+  const word='DESIGN',offsets=[0,0,12,-9,7,0],movable=[2,3,4];
   const container=document.getElementById('kerningWord');container.innerHTML='';
+  const ws=document.querySelector('.kerning-workspace');ws.style.position='relative';
   word.split('').forEach((ch,i)=>{
     const span=document.createElement('span');span.className='kerning-letter'+(movable.includes(i)?'':' fixed');span.textContent=ch;span.style.marginLeft=offsets[i]+'px';span.dataset.offset=offsets[i];
     if(movable.includes(i)){let sx,sm;span.addEventListener('pointerdown',e=>{e.preventDefault();span.setPointerCapture(e.pointerId);sx=e.clientX;sm=parseInt(span.style.marginLeft)||0;span.classList.add('dragging');const move=e2=>{const dx=e2.clientX-sx;const v=Math.max(-20,Math.min(20,sm+dx));span.style.marginLeft=v+'px';span.dataset.offset=v};const up=()=>{span.classList.remove('dragging');span.removeEventListener('pointermove',move);span.removeEventListener('pointerup',up)};span.addEventListener('pointermove',move);span.addEventListener('pointerup',up)})}
     container.appendChild(span);
   });
+  // Hint animation — finger with arrows, 1 second
+  const hint=document.createElement('div');hint.className='kerning-hint-anim';hint.innerHTML='<svg width="64" height="48" viewBox="0 0 64 48"><path d="M10 24 L22 16 L22 20 L42 20 L42 16 L54 24 L42 32 L42 28 L22 28 L22 32 Z" fill="rgba(0,229,255,0.5)"/><text x="32" y="46" text-anchor="middle" font-size="18">👆</text></svg>';
+  ws.appendChild(hint);setTimeout(()=>{if(hint.parentNode)hint.remove()},1300);
 }
 function finishKerning(){
   const letters=document.querySelectorAll('#kerningWord .kerning-letter:not(.fixed)');let totalErr=0;
@@ -812,16 +824,16 @@ let moodSel=[];
 function initMoodboard(){
   moodSel=[];
   document.getElementById('moodGrid').innerHTML=moodItems.map((m,i)=>'<div class="mood-item" data-i="'+i+'" onclick="pickMood(this)"><img class="mood-img" src="'+m.img+'" loading="lazy" alt="'+m.label+'"><div class="mood-label">'+m.label+'</div></div>').join('');
-  document.getElementById('moodCounter').innerHTML='Выбрано: <span class="hl">0</span> из 5–7';
+  document.getElementById('moodCounter').innerHTML='Выбрано: <span class="hl">0</span> / 5';
   document.getElementById('moodNext').disabled=true;
 }
 function pickMood(el){
   const idx=+el.dataset.i;
   const pos=moodSel.indexOf(idx);
   if(pos>-1){moodSel.splice(pos,1);el.classList.remove('selected')}
-  else if(moodSel.length<7){moodSel.push(idx);el.classList.add('selected')}
-  document.getElementById('moodCounter').innerHTML='Выбрано: <span class="hl">'+moodSel.length+'</span> из 5–7';
-  document.getElementById('moodNext').disabled=moodSel.length<5;
+  else if(moodSel.length<5){moodSel.push(idx);el.classList.add('selected')}
+  document.getElementById('moodCounter').innerHTML='Выбрано: <span class="hl">'+moodSel.length+'</span> / 5';
+  document.getElementById('moodNext').disabled=moodSel.length<3;
 }
 function finishMoodboard(){
   moodSel.forEach(idx=>{
@@ -876,27 +888,65 @@ function initEmpathy(){
 function pickEmpathy(el){document.querySelectorAll('.empathy-opt').forEach(c=>c.classList.remove('selected'));el.classList.add('selected');empSel=+el.dataset.i;document.getElementById('empathyNext').disabled=false}
 function finishEmpathy(){const o=empathyData.options[empSel];Object.keys(o.axes).forEach(k=>{S.scores[k]+=o.axes[k]});if(empSel===0)S.achievements.push('Эмпат');awardXP(empSel===0?80:50,'Эмпатия',o.acc,'screen-draw')}
 
-// ===== 4. DRAWING =====
-let drawCtx,drawColor='#ffffff',drawSize=3,isDrawing=false,drawW=600,drawH=400;
+// ===== 4. BUILD HOUSE (drag shapes) =====
+const buildShapes=[
+  {id:'tri',label:'Крыша',svg:'<svg width="60" height="40" viewBox="0 0 60 40"><polygon points="30,2 58,38 2,38" fill="rgba(255,107,157,0.3)" stroke="#ff6b9d" stroke-width="2"/></svg>',color:'#ff6b9d'},
+  {id:'rect',label:'Стена',svg:'<svg width="60" height="50" viewBox="0 0 60 50"><rect x="2" y="2" width="56" height="46" fill="rgba(0,229,255,0.2)" stroke="#00e5ff" stroke-width="2" rx="2"/></svg>',color:'#00e5ff'},
+  {id:'circle',label:'Окно',svg:'<svg width="40" height="40" viewBox="0 0 40 40"><circle cx="20" cy="20" r="17" fill="rgba(251,191,36,0.2)" stroke="#fbbf24" stroke-width="2"/></svg>',color:'#fbbf24'},
+  {id:'door',label:'Дверь',svg:'<svg width="30" height="50" viewBox="0 0 30 50"><rect x="2" y="2" width="26" height="46" rx="13 13 0 0" fill="rgba(179,136,255,0.2)" stroke="#b388ff" stroke-width="2"/><circle cx="22" cy="28" r="2.5" fill="#b388ff"/></svg>',color:'#b388ff'},
+  {id:'chimney',label:'Труба',svg:'<svg width="20" height="40" viewBox="0 0 20 40"><rect x="2" y="2" width="16" height="36" fill="rgba(74,222,128,0.2)" stroke="#4ade80" stroke-width="2" rx="2"/></svg>',color:'#4ade80'}
+];
+let buildPlaced=[];
 function initDraw(){
-  const c=document.getElementById('drawCanvas');const wrap=c.parentElement;
-  drawW=Math.min(600,wrap.clientWidth-40);drawH=Math.round(drawW*0.667);
-  const dpr=window.devicePixelRatio||1;c.width=drawW*dpr;c.height=drawH*dpr;c.style.width=drawW+'px';c.style.height=drawH+'px';
-  drawCtx=c.getContext('2d');drawCtx.scale(dpr,dpr);drawCtx.fillStyle='#1a1a1a';drawCtx.fillRect(0,0,drawW,drawH);drawCtx.lineCap='round';drawCtx.lineJoin='round';
-  c.addEventListener('pointerdown',e=>{e.preventDefault();isDrawing=true;drawCtx.beginPath();const r=c.getBoundingClientRect();const sx=(e.clientX-r.left)*(drawW/r.width);const sy=(e.clientY-r.top)*(drawH/r.height);drawCtx.moveTo(sx,sy)});
-  c.addEventListener('pointermove',e=>{e.preventDefault();if(!isDrawing)return;const r=c.getBoundingClientRect();drawCtx.strokeStyle=drawColor;drawCtx.lineWidth=drawSize;const sx=(e.clientX-r.left)*(drawW/r.width);const sy=(e.clientY-r.top)*(drawH/r.height);drawCtx.lineTo(sx,sy);drawCtx.stroke()});
-  c.addEventListener('pointerup',e=>{e.preventDefault();isDrawing=false});c.addEventListener('pointerleave',()=>{isDrawing=false});
-  c.addEventListener('touchmove',e=>{e.preventDefault()},{passive:false});
+  buildPlaced=[];
+  const pal=document.getElementById('buildPalette');
+  pal.innerHTML=buildShapes.map(s=>'<div class="build-shape" data-shape="'+s.id+'">'+s.svg+'<div style="font-size:10px;color:var(--muted);margin-top:2px;text-align:center;pointer-events:none">'+s.label+'</div></div>').join('');
+  const ab=document.getElementById('buildArtboard');
+  // Remove old placed shapes
+  ab.querySelectorAll('.build-placed').forEach(el=>el.remove());
+  document.getElementById('buildHint').style.display='';
+  // Drag from palette
+  pal.querySelectorAll('.build-shape').forEach(el=>{
+    el.addEventListener('pointerdown',e=>{
+      e.preventDefault();
+      const sid=el.dataset.shape;const s=buildShapes.find(x=>x.id===sid);
+      const clone=document.createElement('div');clone.className='build-placed';clone.innerHTML=s.svg;clone.dataset.shape=sid;
+      const abr=ab.getBoundingClientRect();
+      const cx=abr.width/2-30,cy=abr.height/2-25;
+      clone.style.left=cx+'px';clone.style.top=cy+'px';
+      ab.appendChild(clone);buildPlaced.push(sid);
+      document.getElementById('buildHint').style.display='none';
+      enableDrag(clone,ab);
+    });
+  });
 }
-function setDrawColor(c,btn){drawColor=c;document.querySelectorAll('#drawToolbar button:not([data-group])').forEach(b=>b.classList.remove('active'));btn.classList.add('active')}
-function setDrawSize(s,btn){drawSize=s;document.querySelectorAll('#drawToolbar button[data-group="size"]').forEach(b=>b.classList.remove('active'));btn.classList.add('active')}
-function clearDrawCanvas(){drawCtx.fillStyle='#1a1a1a';drawCtx.fillRect(0,0,drawW,drawH)}
+function enableDrag(el,ab){
+  let sx,sy,ox,oy;
+  el.addEventListener('pointerdown',e=>{
+    e.preventDefault();e.stopPropagation();
+    el.setPointerCapture(e.pointerId);
+    const r=ab.getBoundingClientRect();
+    sx=e.clientX;sy=e.clientY;ox=parseInt(el.style.left)||0;oy=parseInt(el.style.top)||0;
+    const move=e2=>{
+      const dx=e2.clientX-sx,dy=e2.clientY-sy;
+      el.style.left=Math.max(0,Math.min(r.width-60,ox+dx))+'px';
+      el.style.top=Math.max(0,Math.min(r.height-50,oy+dy))+'px';
+    };
+    const up=()=>{el.removeEventListener('pointermove',move);el.removeEventListener('pointerup',up)};
+    el.addEventListener('pointermove',move);el.addEventListener('pointerup',up);
+  });
+  // Double tap to remove
+  el.addEventListener('dblclick',()=>{
+    const sid=el.dataset.shape;buildPlaced.splice(buildPlaced.indexOf(sid),1);el.remove();
+    if(!buildPlaced.length)document.getElementById('buildHint').style.display='';
+  });
+}
 function finishDraw(){
   document.body.classList.remove('no-scroll');
-  const c=document.getElementById('drawCanvas');const data=drawCtx.getImageData(0,0,c.width,c.height).data;let drawn=0;
-  for(let i=0;i<data.length;i+=16){if(data[i]>30||data[i+1]>30||data[i+2]>30)drawn++}
-  if(drawn>200){S.scores.thinking+=10;S.scores.comm-=5;S.achievements.push('Художник')}
-  awardXP(drawn>200?80:40,'Рисование',null,'screen-assembly');
+  const hasTri=buildPlaced.includes('tri'),hasRect=buildPlaced.includes('rect');
+  const count=buildPlaced.length;
+  if(count>=3&&hasTri&&hasRect){S.scores.thinking+=10;S.scores.scale+=5;S.achievements.push('Архитектор')}
+  awardXP(count>=3?80:40,'Конструктор',null,'screen-assembly');
 }
 
 // ===== 5. ASSEMBLY (tap-based for mobile) =====
