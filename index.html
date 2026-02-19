@@ -399,7 +399,7 @@ body.no-scroll{overflow:hidden!important;position:fixed;width:100%;top:0;left:0}
     <div class="welcome-title">Какой ты<br><span class="hl">дизайнер?</span></div>
     <div class="welcome-sub">Пройди мини-задания и&nbsp;узнай, какая дизайн-профессия тебе зайдёт</div>
     <div class="welcome-meta">
-      <span>⏱ ~5&nbsp;минут</span><span>🎮 Интерактивные задания</span><span>📊 Личный путь развития</span>
+      <span>⏱ ~5&nbsp;минут</span><span>🎮 16&nbsp;заданий</span><span>📊 Личный путь развития</span>
     </div>
     <button class="btn" onclick="go('screen-edu')">Погнали →</button>
   </div>
@@ -478,17 +478,9 @@ body.no-scroll{overflow:hidden!important;position:fixed;width:100%;top:0;left:0}
   <div class="btn-row"><button class="btn" id="caseNext" disabled onclick="finishCase()">Го дальше →</button></div>
 </div>
 
-<!-- SCREEN: EMPATHY / UX -->
-<div class="screen" id="screen-empathy">
-  <div class="module-tag">Модуль 8 · Эмпатия</div>
-  <div class="module-title">Помоги юзеру 🫶</div>
-  <div class="module-desc" id="empathyDesc"></div>
-  <div class="empathy-mockups" id="empathyOpts"></div>
-  <div class="btn-row"><button class="btn" id="empathyNext" disabled onclick="finishEmpathy()">Го дальше →</button></div>
-</div>
 
 <div class="screen" id="screen-draw">
-  <div class="module-tag">Модуль 9 · Конструктор</div>
+  <div class="module-tag">Модуль 8 · Конструктор</div>
   <div class="module-title">Собери дом 🏠</div>
   <div class="module-desc">Тяни фигуры на&nbsp;артборд и&nbsp;собери домик. Какой&nbsp;— решать тебе</div>
   <div class="build-area">
@@ -502,57 +494,51 @@ body.no-scroll{overflow:hidden!important;position:fixed;width:100%;top:0;left:0}
 
 
 <div class="screen" id="screen-color">
-  <div class="module-tag">Модуль 10 · Цвет</div>
+  <div class="module-tag">Модуль 9 · Цвет</div>
   <div class="module-title">Подбери палитру 🎨</div>
   <div class="module-desc">Какая палитра зайдёт для приложения медитации?</div>
   <div class="color-options" id="colorOpts"></div>
   <div class="btn-row"><button class="btn" id="colorNext" disabled onclick="finishColor()">Го дальше →</button></div>
 </div>
 
-<!-- SCREEN: COLOR MEMORY -->
-<div class="screen" id="screen-colormemory">
-  <div class="module-tag">Модуль 11 · Цветовая память</div>
-  <div class="module-title">Запомни палитру 🧠</div>
-  <div class="module-desc">Жми кнопку&nbsp;— палитра мелькнёт на&nbsp;3&nbsp;секунды. Потом найди её среди вариантов</div>
-  <div id="cmArea">
-    <button class="btn" id="cmRevealBtn" onclick="cmReveal()">Показать на\u00a03\u00a0сек 👀</button>
-    <div class="cm-palette" id="cmPalette" style="display:none"></div>
-    <div class="cm-options" id="cmOptions" style="display:none"></div>
-  </div>
-  <div class="btn-row"><button class="btn" id="cmNext" disabled onclick="finishColorMemory()">Го дальше →</button></div>
-</div>
 
 <div class="screen" id="screen-font">
-  <div class="module-tag">Модуль 12 · Шрифты</div>
+  <div class="module-tag">Модуль 10 · Шрифты</div>
   <div class="module-title">Подбери шрифт 🔤</div>
   <div class="module-desc">Какая пара шрифтов зайдёт для сайта юридической фирмы?</div>
   <div class="font-pairs" id="fontPairs"></div>
   <div class="btn-row"><button class="btn" id="fontNext" disabled onclick="finishFont()">Го дальше →</button></div>
 </div>
 
-<div class="screen" id="screen-spot">
-  <div class="module-tag">Модуль 13 · Внимание к&nbsp;деталям</div>
-  <div class="module-title">Найди косяк 🔍</div>
-  <div class="module-desc">6&nbsp;элементов интерфейса. В&nbsp;одном&nbsp;— грубая ошибка. Найди и&nbsp;тапни</div>
-  <div class="spot-workspace" id="spotItems"></div>
-  <div class="btn-row"><button class="btn" id="spotNext" disabled onclick="finishSpot()">Го дальше →</button></div>
+<!-- SCREEN: LOGO DRAW (show 5s then draw) -->
+<div class="screen" id="screen-logodraw">
+  <div class="module-tag">Модуль 11 · Визуальная память</div>
+  <div class="module-title">Нарисуй логотип 🖊</div>
+  <div class="module-desc" id="ldDesc">Сейчас на&nbsp;5&nbsp;секунд появится логотип. Запомни его и&nbsp;нарисуй по&nbsp;памяти</div>
+  <div id="ldPreview" style="text-align:center;margin:16px 0"><button class="btn" id="ldShowBtn" onclick="ldShow()">Показать логотип 👀</button></div>
+  <div class="draw-workspace" id="ldDrawWrap" style="display:none">
+    <div class="draw-toolbar"><button class="active" onclick="ldTool('pen',this)">✏️ Карандаш</button><button onclick="ldTool('eraser',this)">🧹 Ластик</button><button onclick="ldClear()">🗑 Очистить</button></div>
+    <canvas class="draw-canvas" id="ldCanvas" width="600" height="400"></canvas>
+  </div>
+  <div class="btn-row"><button class="btn" id="ldNext" style="display:none" onclick="finishLogoDraw()">Го дальше →</button></div>
 </div>
 
-<div class="screen" id="screen-proportion">
-  <div class="module-tag">Модуль 14 · Пропорции</div>
-  <div class="module-title">Поймай золотое сечение 📐</div>
-  <div class="module-desc">Пропорция ~62:38&nbsp;— глаз считает её идеальной. Двигай разделитель и&nbsp;поймай</div>
+<div class="screen" id="screen-colorprop">
+  <div class="module-tag">Модуль 12 · Пропорции цвета</div>
+  <div class="module-title">Сколько тут цвета? 🎨</div>
+  <div class="module-desc">Двигай разделитель, чтобы показать пропорцию двух цветов на&nbsp;картинке</div>
   <div class="proportion-workspace">
-    <canvas class="proportion-canvas" id="propCanvas"></canvas>
-    <div class="proportion-value" id="propValue">50 : 50</div>
+    <div id="cpImage" style="width:100%;max-width:400px;margin:0 auto 16px;border-radius:12px;overflow:hidden"><img id="cpImg" style="width:100%;display:block" src="" alt=""></div>
+    <canvas class="proportion-canvas" id="cpCanvas"></canvas>
+    <div class="proportion-value" id="cpValue">50 : 50</div>
     <div class="proportion-hint">← двигай →</div>
   </div>
-  <div class="btn-row"><button class="btn" onclick="finishProportion()">Го дальше →</button></div>
+  <div class="btn-row"><button class="btn" onclick="finishColorProp()">Го дальше →</button></div>
 </div>
 
 <!-- SCREEN: SPATIAL THINKING -->
 <div class="screen" id="screen-spatial">
-  <div class="module-tag">Модуль 15 · Пространство</div>
+  <div class="module-tag">Модуль 13 · Пространство</div>
   <div class="module-title">Представь в&nbsp;3D 🧊</div>
   <div class="module-desc">Какой объект получится, если сложить эту развёртку?</div>
   <div class="spatial-unfold" id="spatialUnfold"></div>
@@ -562,7 +548,7 @@ body.no-scroll{overflow:hidden!important;position:fixed;width:100%;top:0;left:0}
 
 <!-- SCREEN: STYLE VS FUNCTION -->
 <div class="screen" id="screen-stylefunction">
-  <div class="module-tag">Модуль 16 · Стиль и&nbsp;функция</div>
+  <div class="module-tag">Модуль 14 · Стиль и&nbsp;функция</div>
   <div class="module-title">Красота или удобство? ⚡</div>
   <div class="module-desc" id="sfDesc"></div>
   <div class="sf-pair" id="sfPair"></div>
@@ -572,7 +558,7 @@ body.no-scroll{overflow:hidden!important;position:fixed;width:100%;top:0;left:0}
 
 <!-- SCREEN: ROLE -->
 <div class="screen" id="screen-role">
-  <div class="module-tag">Модуль 17 · Роль</div>
+  <div class="module-tag">Модуль 15 · Роль</div>
   <div class="module-title">Кто ты в&nbsp;тиме? 👥</div>
   <div class="module-desc">Два сценария&nbsp;— выбери роль, которая тебе ближе</div>
   <div id="roleContainer"></div>
@@ -580,7 +566,7 @@ body.no-scroll{overflow:hidden!important;position:fixed;width:100%;top:0;left:0}
 </div>
 
 <div class="screen" id="screen-dream">
-  <div class="module-tag">Модуль 18 · Мечта</div>
+  <div class="module-tag">Модуль 16 · Мечта</div>
   <div class="module-title">Проект мечты 🚀</div>
   <div class="module-desc">Полная свобода! Выбери 2&nbsp;проекта, которые хочется сделать больше всего</div>
   <div class="choice-grid" id="dreamGrid"></div>
@@ -647,7 +633,7 @@ if (tg) { tg.ready(); tg.expand(); }
 
 // ===== STATE =====
 const S = { edu:null, scores:{scale:50,material:50,thinking:50,comm:50,role:50}, achievements:[] };
-const screens = ['screen-welcome','screen-edu','screen-selfassess','screen-kerning','screen-choice','screen-moodboard','screen-materials','screen-case','screen-empathy','screen-draw','screen-color','screen-colormemory','screen-font','screen-spot','screen-proportion','screen-spatial','screen-stylefunction','screen-role','screen-dream','screen-results'];
+const screens = ['screen-welcome','screen-edu','screen-selfassess','screen-kerning','screen-choice','screen-moodboard','screen-materials','screen-case','screen-draw','screen-color','screen-font','screen-logodraw','screen-colorprop','screen-spatial','screen-stylefunction','screen-role','screen-dream','screen-results'];
 let currentScreen = 'screen-welcome';
 const screenHistory = [];
 
@@ -701,7 +687,7 @@ function go(id){
   document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
   document.getElementById(id).classList.add('active');
   // Lock/unlock scroll for drawing screens
-  if(id==='screen-proportion'||id==='screen-kerning'||id==='screen-draw'||id==='screen-moodboard'){document.body.classList.add('no-scroll')}else{document.body.classList.remove('no-scroll')}
+  if(id==='screen-colorprop'||id==='screen-kerning'||id==='screen-draw'||id==='screen-moodboard'||id==='screen-logodraw'){document.body.classList.add('no-scroll')}else{document.body.classList.remove('no-scroll')}
   window.scrollTo(0,0);currentScreen=id;
   const idx=screens.indexOf(id);
   document.getElementById('progressBar').style.width=((idx/(screens.length-1))*100)+'%';
@@ -717,14 +703,11 @@ function go(id){
   if(id==='screen-moodboard')initMoodboard();
   if(id==='screen-case')initCase();
   if(id==='screen-draw')initDraw();
-  // screen-assembly removed
   if(id==='screen-materials')initMaterials();
-  if(id==='screen-empathy')initEmpathy();
   if(id==='screen-color')initColor();
-  if(id==='screen-colormemory')initColorMemory();
   if(id==='screen-font')initFont();
-  if(id==='screen-spot')initSpot();
-  if(id==='screen-proportion')initProportion();
+  if(id==='screen-logodraw')initLogoDraw();
+  if(id==='screen-colorprop')initColorProp();
   if(id==='screen-spatial')initSpatial();
   if(id==='screen-stylefunction')initStyleFunction();
   if(id==='screen-role')initRole();
@@ -918,7 +901,7 @@ function finishMaterials(){const axes=matData[matSel].axes;Object.keys(axes).for
 const caseOpts=[{icon:'🏗',text:'Перепроектировать пространство — зоны для тусовок, гамаки, подиумы',axes:{scale:15,material:10}},{icon:'🎨',text:'Яркая айдентика — мемы, стикеры, навигация',axes:{comm:-15,thinking:5,material:-10}},{icon:'📱',text:'Приложение — квесты, AR с книжными героями',axes:{material:-20,comm:-10}},{icon:'👕',text:'Мерч — худи, шоперы, значки для читателей',axes:{material:15,thinking:15}},{icon:'🪑',text:'Модульная мебель — трансформеры для разных сценариев',axes:{scale:5,material:10,thinking:-10}},{icon:'📊',text:'Стратегия продвижения — SMM, коллабы, ивенты',axes:{role:25,thinking:-10}}];
 function initCase(){document.getElementById('caseOpts').innerHTML=caseOpts.map((o,i)=>'<div class="case-opt" data-i="'+i+'" onclick="pickCase(this)"><div class="opt-icon">'+o.icon+'</div><div class="opt-text">'+o.text+'</div></div>').join('');document.getElementById('caseNext').disabled=true}
 function pickCase(el){document.querySelectorAll('#caseOpts .case-opt').forEach(c=>c.classList.remove('selected'));el.classList.add('selected');S._caseSel=+el.dataset.i;document.getElementById('caseNext').disabled=false}
-function finishCase(){awardXP(70,'Кейс',null,'screen-empathy')}
+function finishCase(){awardXP(70,'Кейс',null,'screen-draw')}
 
 // ===== EMPATHY / UX =====
 const empathyData={
@@ -1036,7 +1019,7 @@ const colorPalettes=[{colors:['#1a1a2e','#16213e','#533483','#e94560'],label:'Т
 let colorSel=-1;
 function initColor(){colorSel=-1;document.getElementById('colorOpts').innerHTML=colorPalettes.map((p,i)=>'<div class="color-opt" data-i="'+i+'" onclick="pickColor(this)"><div class="color-swatches">'+p.colors.map(c=>'<div style="background:'+c+'"></div>').join('')+'</div><div class="color-opt-label">'+p.label+'</div></div>').join('');document.getElementById('colorNext').disabled=true}
 function pickColor(el){document.querySelectorAll('.color-opt').forEach(c=>c.classList.remove('selected'));el.classList.add('selected');colorSel=+el.dataset.i;document.getElementById('colorNext').disabled=false}
-function finishColor(){const axes=colorPalettes[colorSel].axes;Object.keys(axes).forEach(k=>{S.scores[k]+=axes[k]});const colorAcc=colorSel===1?95:colorSel===2?60:colorSel===0?45:55;awardXP(60,'Цвет',colorAcc,'screen-colormemory')}
+function finishColor(){const axes=colorPalettes[colorSel].axes;Object.keys(axes).forEach(k=>{S.scores[k]+=axes[k]});const colorAcc=colorSel===1?95:colorSel===2?60:colorSel===0?45:55;awardXP(60,'Цвет',colorAcc,'screen-font')}
 
 // ===== COLOR MEMORY =====
 const cmTarget=['#e94560','#533483','#16213e','#1a1a2e'];
@@ -1084,7 +1067,7 @@ const fontData=[{head:'Times New Roman',body:'Georgia',style:'font-family:Times 
 let fontSel=-1;
 function initFont(){fontSel=-1;document.getElementById('fontPairs').innerHTML=fontData.map((f,i)=>'<div class="font-pair" data-i="'+i+'" onclick="pickFont(this)"><div class="font-left"><div class="font-sample" style="'+f.style+';font-size:28px;font-weight:bold">Аа</div></div><div class="font-right"><div class="font-sample" style="'+f.style+';font-size:18px;font-weight:bold">Заголовок</div><div class="font-sample" style="'+f.style+';font-size:14px;color:var(--muted)">Основной текст</div><div class="font-name">'+f.label+'</div></div></div>').join('');document.getElementById('fontNext').disabled=true}
 function pickFont(el){document.querySelectorAll('.font-pair').forEach(c=>c.classList.remove('selected'));el.classList.add('selected');fontSel=+el.dataset.i;document.getElementById('fontNext').disabled=false}
-function finishFont(){const axes=fontData[fontSel].axes;Object.keys(axes).forEach(k=>{S.scores[k]+=axes[k]});const fontAcc=fontSel===0?92:fontSel===2?78:fontSel===1?55:30;awardXP(60,'Шрифты',fontAcc,'screen-spot')}
+function finishFont(){const axes=fontData[fontSel].axes;Object.keys(axes).forEach(k=>{S.scores[k]+=axes[k]});const fontAcc=fontSel===0?92:fontSel===2?78:fontSel===1?55:30;awardXP(60,'Шрифты',fontAcc,'screen-logodraw')}
 
 // ===== 8. SPOT ERROR =====
 const spotData={items:[
@@ -1100,27 +1083,67 @@ function initSpot(){spotSel=null;document.getElementById('spotItems').innerHTML=
 function pickSpot(el){document.querySelectorAll('.spot-item').forEach(c=>c.classList.remove('selected'));el.classList.add('selected');spotSel=+el.dataset.i;document.getElementById('spotNext').disabled=false}
 function finishSpot(){const item=spotData.items[spotSel];if(!item.ok){S.scores.thinking-=10;S.scores.comm-=5;S.achievements.push('Зоркий глаз')}const spotAcc=!item.ok?100:20;awardXP(!item.ok?80:40,'Детали',spotAcc,'screen-proportion')}
 
-// ===== 9. PROPORTION =====
-let propRatio=50,propW=560,propH=200;
-function initProportion(){
-  propRatio=50;const c=document.getElementById('propCanvas');
-  propW=Math.min(560,c.parentElement.clientWidth-40);propH=Math.round(propW*0.357);
-  drawProportion();
-  const move=e=>{const r=c.getBoundingClientRect();propRatio=Math.max(20,Math.min(80,((e.clientX-r.left)/r.width)*100));drawProportion()};
+// ===== LOGO DRAW (show 5s + draw from memory) =====
+const ldLogos=[
+  {svg:'<svg width="200" height="150" viewBox="0 0 200 150"><rect width="200" height="150" fill="#111115"/><circle cx="100" cy="55" r="30" stroke="#00e5ff" stroke-width="2.5" fill="none"/><path d="M85 55 C85 42 100 30 100 30 C100 30 115 42 115 55" stroke="#00e5ff" stroke-width="2.5" fill="none"/><circle cx="100" cy="50" r="5" fill="#00e5ff" opacity="0.6"/><text x="100" y="120" font-family="sans-serif" font-size="14" fill="#999" text-anchor="middle" letter-spacing="6">ЗЕРНО</text></svg>'},
+  {svg:'<svg width="200" height="150" viewBox="0 0 200 150"><rect width="200" height="150" fill="#111115"/><rect x="72" y="28" width="56" height="56" stroke="#00e5ff" stroke-width="2.5" fill="rgba(0,229,255,0.08)" transform="rotate(45 100 56)"/><circle cx="100" cy="56" r="18" stroke="#b388ff" stroke-width="2.5" fill="rgba(179,136,255,0.1)"/><text x="100" y="120" font-family="sans-serif" font-size="12" fill="#888" text-anchor="middle" letter-spacing="5">ЗЕРНО</text></svg>'}
+];
+let ldCtx,ldDrawing=false,ldLastX,ldLastY,ldMode='pen';
+function initLogoDraw(){
+  const logo=ldLogos[Math.floor(Math.random()*ldLogos.length)];
+  document.getElementById('ldPreview').innerHTML='<button class="btn" id="ldShowBtn" onclick="ldShow()">Показать логотип 👀</button>';
+  document.getElementById('ldDrawWrap').style.display='none';
+  document.getElementById('ldNext').style.display='none';
+  document.getElementById('ldDesc').textContent='Сейчас на\u00a05\u00a0секунд появится логотип. Запомни его и\u00a0нарисуй по\u00a0памяти';
+  window._ldLogo=logo;
+}
+function ldShow(){
+  const preview=document.getElementById('ldPreview');
+  preview.innerHTML=window._ldLogo.svg;
+  document.getElementById('ldShowBtn')&&(document.getElementById('ldShowBtn').style.display='none');
+  setTimeout(()=>{
+    preview.innerHTML='<div style="color:var(--muted);font-size:14px">Время вышло! Рисуй по\u00a0памяти ✏️</div>';
+    const wrap=document.getElementById('ldDrawWrap');wrap.style.display='block';
+    document.getElementById('ldNext').style.display='inline-flex';
+    const c=document.getElementById('ldCanvas');
+    const W=Math.min(600,c.parentElement.clientWidth-20);c.width=W;c.height=Math.round(W*0.67);c.style.width=W+'px';c.style.height=c.height+'px';
+    ldCtx=c.getContext('2d');ldCtx.fillStyle='#1a1a1a';ldCtx.fillRect(0,0,c.width,c.height);ldCtx.lineCap='round';ldCtx.lineJoin='round';
+    c.addEventListener('pointerdown',ldDown);c.addEventListener('pointermove',ldMove);c.addEventListener('pointerup',ldUp);
+  },5000);
+}
+function ldDown(e){ldDrawing=true;const r=e.target.getBoundingClientRect();ldLastX=e.clientX-r.left;ldLastY=e.clientY-r.top;e.target.setPointerCapture(e.pointerId)}
+function ldMove(e){if(!ldDrawing)return;const r=e.target.getBoundingClientRect();const x=e.clientX-r.left,y=e.clientY-r.top;ldCtx.beginPath();ldCtx.moveTo(ldLastX,ldLastY);ldCtx.lineTo(x,y);ldCtx.strokeStyle=ldMode==='pen'?'#00e5ff':'#1a1a1a';ldCtx.lineWidth=ldMode==='pen'?3:16;ldCtx.stroke();ldLastX=x;ldLastY=y}
+function ldUp(){ldDrawing=false}
+function ldTool(t,btn){ldMode=t;document.querySelectorAll('#ldDrawWrap .draw-toolbar button').forEach(b=>b.classList.remove('active'));btn.classList.add('active')}
+function ldClear(){ldCtx.fillStyle='#1a1a1a';ldCtx.fillRect(0,0,ldCtx.canvas.width,ldCtx.canvas.height)}
+function finishLogoDraw(){S.achievements.push('Творец');awardXP(75,'Лого',null,'screen-colorprop')}
+
+// ===== COLOR PROPORTION =====
+const cpData={img:'img/83.jpg',colorA:'#1a3a5e',colorB:'#f5a623',nameA:'Синий',nameB:'Оранжевый',target:72};
+let cpRatio=50,cpW=400,cpH=60;
+function initColorProp(){
+  cpRatio=50;
+  document.getElementById('cpImg').src=cpData.img;
+  const c=document.getElementById('cpCanvas');
+  cpW=Math.min(400,c.parentElement.clientWidth-40);cpH=60;
+  drawColorProp();
+  const move=e=>{const r=c.getBoundingClientRect();cpRatio=Math.max(10,Math.min(90,((e.clientX-r.left)/r.width)*100));drawColorProp()};
   c.addEventListener('pointerdown',e=>{move(e);c.setPointerCapture(e.pointerId);c.addEventListener('pointermove',move);c.addEventListener('pointerup',()=>c.removeEventListener('pointermove',move),{once:true})});
 }
-function drawProportion(){
-  const c=document.getElementById('propCanvas');const ctx=c.getContext('2d');const dpr=window.devicePixelRatio||1;
-  c.width=propW*dpr;c.height=propH*dpr;c.style.width=propW+'px';c.style.height=propH+'px';ctx.scale(dpr,dpr);
-  const W=propW,H=propH,pad=16;const split=pad+(W-2*pad)*(propRatio/100);
-  ctx.fillStyle='#1a1a1a';ctx.fillRect(0,0,W,H);
-  ctx.fillStyle='rgba(0,229,255,0.15)';ctx.fillRect(pad,pad,split-pad,H-2*pad);ctx.strokeStyle='rgba(0,229,255,0.5)';ctx.lineWidth=1.5;ctx.strokeRect(pad,pad,split-pad,H-2*pad);
-  ctx.fillStyle='rgba(179,136,255,0.15)';ctx.fillRect(split,pad,W-pad-split,H-2*pad);ctx.strokeStyle='rgba(179,136,255,0.5)';ctx.strokeRect(split,pad,W-pad-split,H-2*pad);
-  ctx.beginPath();ctx.moveTo(split,pad-5);ctx.lineTo(split,H-pad+5);ctx.strokeStyle='#fff';ctx.lineWidth=2;ctx.stroke();
-  ctx.beginPath();ctx.arc(split,H/2,8,0,Math.PI*2);ctx.fillStyle='#fff';ctx.fill();
-  document.getElementById('propValue').textContent=Math.round(propRatio)+' : '+(100-Math.round(propRatio));
+function drawColorProp(){
+  const c=document.getElementById('cpCanvas');const ctx=c.getContext('2d');const dpr=window.devicePixelRatio||1;
+  c.width=cpW*dpr;c.height=cpH*dpr;c.style.width=cpW+'px';c.style.height=cpH+'px';ctx.scale(dpr,dpr);
+  const W=cpW,H=cpH,pad=4,r=10;const split=pad+(W-2*pad)*(cpRatio/100);
+  // Left color
+  ctx.beginPath();ctx.moveTo(pad+r,pad);ctx.lineTo(split,pad);ctx.lineTo(split,H-pad);ctx.lineTo(pad+r,H-pad);ctx.arcTo(pad,H-pad,pad,H-pad-r,r);ctx.lineTo(pad,pad+r);ctx.arcTo(pad,pad,pad+r,pad,r);ctx.closePath();ctx.fillStyle=cpData.colorA;ctx.fill();
+  // Right color
+  ctx.beginPath();ctx.moveTo(split,pad);ctx.lineTo(W-pad-r,pad);ctx.arcTo(W-pad,pad,W-pad,pad+r,r);ctx.lineTo(W-pad,H-pad-r);ctx.arcTo(W-pad,H-pad,W-pad-r,H-pad,r);ctx.lineTo(split,H-pad);ctx.closePath();ctx.fillStyle=cpData.colorB;ctx.fill();
+  // Divider
+  ctx.beginPath();ctx.moveTo(split,pad-2);ctx.lineTo(split,H-pad+2);ctx.strokeStyle='#fff';ctx.lineWidth=3;ctx.stroke();
+  ctx.beginPath();ctx.arc(split,H/2,7,0,Math.PI*2);ctx.fillStyle='#fff';ctx.fill();
+  document.getElementById('cpValue').textContent=cpData.nameA+' '+Math.round(cpRatio)+'% · '+cpData.nameB+' '+(100-Math.round(cpRatio))+'%';
 }
-function finishProportion(){const golden=61.8;const err=Math.abs(propRatio-golden);const acc=Math.max(0,100-err*3);S.scores.scale+=acc*0.15;S.scores.thinking-=acc*0.1;if(err<5)S.achievements.push('Золотое сечение');const propAcc=Math.max(5,Math.round(100-err*2.5));awardXP(err<5?90:err<15?65:40,'Пропорции',propAcc,'screen-spatial')}
+function finishColorProp(){const err=Math.abs(cpRatio-cpData.target);const acc=Math.max(5,Math.round(100-err*2));S.scores.thinking-=acc*0.08;S.scores.comm-=acc*0.05;if(err<8)S.achievements.push('Цветовая память');awardXP(err<8?85:err<20?60:40,'Пропорция',acc,'screen-spatial')}
 
 // ===== SPATIAL THINKING =====
 const spatialUnfoldSvg='<svg width="200" height="160" viewBox="0 0 200 160" xmlns="http://www.w3.org/2000/svg"><rect x="60" y="0" width="50" height="50" fill="none" stroke="#00e5ff" stroke-width="2" stroke-dasharray="4"/><rect x="60" y="50" width="50" height="50" fill="none" stroke="#00e5ff" stroke-width="2"/><rect x="0" y="50" width="60" height="50" fill="none" stroke="#00e5ff" stroke-width="2" stroke-dasharray="4"/><rect x="110" y="50" width="60" height="50" fill="none" stroke="#00e5ff" stroke-width="2" stroke-dasharray="4"/><rect x="60" y="100" width="50" height="50" fill="none" stroke="#00e5ff" stroke-width="2" stroke-dasharray="4"/><text x="85" y="80" text-anchor="middle" fill="#00e5ff" font-size="10" font-family="sans-serif">ОСНОВА</text></svg>';
